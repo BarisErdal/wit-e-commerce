@@ -1,15 +1,18 @@
 
 import './App.css'
 
+  import { ToastContainer} from 'react-toastify';
 function App() {
 
 
   return (
     <>
       
-      <p  className='text-amber-200 text-7xl font-bold'>
-        App component
+      <p  className='text-midnight text-7xl font-bold'>
+        wit e commerce
+         
       </p>
+      <ToastContainer/>
     </>
   )
 }
