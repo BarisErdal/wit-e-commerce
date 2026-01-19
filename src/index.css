@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+
+
+@theme {
+  --color-midnight: #1f2937;
+  --color-acikgri: #6b7280;
+  --color-acikindigo: #3730a3;
+  --color-indigo: #4338ca;
+  --color-ozelgri: #bab2e7;
+  --color-profilmavisi: #eeebff;
+
+
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
