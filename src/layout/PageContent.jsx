@@ -1,5 +1,6 @@
 
 import Carousel from '../components/Carousel';
+import Bestsellers from './Bestsellers';
 import EditorsPick from './EditorsPick';
 
 const PageContent = () => {
@@ -11,6 +12,7 @@ const PageContent = () => {
 
     <Carousel/>
     <EditorsPick />
+    <Bestsellers/>
     </>
     );
     }
