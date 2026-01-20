@@ -1,10 +1,35 @@
 import { useState } from "react";
+import {
+  User,
+  Search,
+  ShoppingCart,
+  Menu,
+  X,  Heart, Instagram, Youtube, Facebook, Twitter,Phone
+} from "lucide-react";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
 
-  return (
+
+
+
+ return (
     <header className="fixed top-0 left-0 w-full z-50 bg-white">
+      <div className="hidden md:flex bg-dark-bg h-16  text-white justify-between items-center px-6 font-bold font-montserrat"><div className="flex items-center">
+
+
+       <Phone size={16}/> <p className="ml-3">(225) 555-0118</p>
+      </div>
+      <p>Follow Us  and get a chance to win 80% off</p>
+      <div className="flex items-center gap-4">
+          <p>Follow Us : </p>
+          <Instagram size={18} />
+          <Youtube size={18}/>
+          <Facebook size={18} />
+          <Twitter size={18} />
+
+      </div>
+      </div>
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
@@ -12,7 +37,7 @@ export default function Header() {
 
           {/* Desktop Menu */}
           <nav className="hidden md:flex gap-8 text-sm font-medium">
-            <a href="#" className="hover:text-success">Home</a>
+         <a href="#" className="hover:text-success">Home</a>
             <a href="#" className="hover:text-success">Shop</a>
             <a href="#" className="hover:text-success">About</a>
              <a href="#" className="hover:text-success">Blog</a>
@@ -20,15 +45,42 @@ export default function Header() {
             <a href="#" className="hover:text-success">Contact</a>
           </nav>
 
-          {/* Mobile Button */}
-          <button
-            onClick={() => setOpen(!open)}
-            className="md:hidden flex flex-col gap-1 items-end"
-          >
-            <span className="w-6 h-0.5 bg-black" />
-            <span className="w-5 h-0.5 bg-black" />
-            <span className="w-4 h-0.5 bg-black" />
-          </button>
+          {/* Right Icons */}
+          <div className="flex items-center gap-4">
+
+
+                  {/* Login */}
+            <button className="text-header-turkuaz flex items-center gap-1">
+              Login/Register<User size={20} />
+            </button>
+
+            {/* Search */}
+            <button className="text-header-turkuaz ">
+              <Search size={20} />
+            </button>
+
+      
+            {/* Cart */}
+            <button className="relative text-header-turkuaz">
+              <ShoppingCart size={20} />
+              <span className="absolute -top-2 -right-2 bg-success text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full">
+                2
+              </span>
+            </button>
+
+
+                 <button className="text-header-turkuaz">
+              <Heart size={20} />
+            </button>
+
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setOpen(!open)}
+              className="md:hidden"
+            >
+              {open ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
       </div>
 
@@ -42,6 +94,14 @@ export default function Header() {
              <a href="#" className="hover:text-success">Blog</a>
               <a href="#" className="hover:text-success">Pages</a>
             <a href="#" className="hover:text-success">Contact</a>
+            <div className="flex gap-4 pt-4 border-t">
+              <button className="flex items-center gap-2">
+                <User size={18} /> Login
+              </button>
+              <button className="flex items-center gap-2">
+                <ShoppingCart size={18} /> Cart
+              </button>
+            </div>
           </nav>
         </div>
       )}
