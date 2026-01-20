@@ -5,9 +5,14 @@
 @theme {
   --color-midnight: #1f2937;
 --color-success: #2DC071;
+--color-logo-blue: #252B42;
+
 
 --font-montserrat: 'Montserrat', sans-serif;
 
 }
 
 @custom-variant dark (&:where(.dark, .dark *));
+
+
+
