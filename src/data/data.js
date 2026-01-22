@@ -63,3 +63,31 @@ src:"/calltobuy.png",
     description: "We know how large objects will act, but things on a small scale.",
 
 }
+
+
+export const featuredProducts=[
+
+
+  {links:["Google","Trending","New"],
+    title: "Loudest à la Madison #1 (L'integral)",
+    description:"We focus on ergonomics and meeting  you where you work. It's only a  keystroke away.",
+    date:"22 April 2021",
+    comments:"10",
+    src: '/featured1.jpg'
+  },
+   {links:["Google","Trending","New"],
+    title: "Loudest à la Madison #2 (L'integral)",
+    description:"We focus on ergonomics and meeting  you where you work. It's only a  keystroke away.",
+    date:"22 April 2021",
+    comments:"10",
+    src: '/featured2.jpg'
+  },
+   {links:["Google","Trending","New"],
+    title: "Loudest à la Madison #3 (L'integral)",
+    description:"We focus on ergonomics and meeting  you where you work. It's only a  keystroke away.",
+    date:"22 April 2021",
+    comments:"10",
+    src: '/featured3.jpg'
+  },
+
+]

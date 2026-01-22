@@ -3,7 +3,7 @@ import ButtonCta from "./ButtonCta";
 
 
 
-export default function Carousel({ slides }) {
+export default function Carousel({ slides, imgClasses, height }) {
   const [index, setIndex] = useState(0);
 
   const next = () =>
@@ -15,7 +15,7 @@ export default function Carousel({ slides }) {
     );
 
   return (
-    <div className="relative w-full h-screen overflow-x-hidden ">
+    <div className={`relative w-full  overflow-x-hidden md:h-screen ${height? height:"h-screen"}`}>
        <div className="overflow-hidden h-full">
     <div
       className="flex h-full transition-transform duration-500 ease-in-out"
@@ -30,7 +30,7 @@ export default function Carousel({ slides }) {
           <img
             src={slide.src}
             alt={slide.title}
-            className="w-full h-full object-cover"
+            className={`w-full h-full object-cover ${imgClasses}`}
           />
 
           {/* Overlay Text */}
