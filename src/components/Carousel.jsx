@@ -1,37 +1,9 @@
 import { useState } from "react";
-
-
-const slides = [
-  {
-    id: 1,
-    src: "/Carousel1.jpg",
-    title: "NEW COLLECTION",
-    season:"SUMMER 2026",
-    description: "We know how large objects will act, but things on a  small scale.",
-    cta: "SHOP NOW",
-  },
-  {
-    id: 2,
-    src: "https://picsum.photos/1200/800?2",
-    title: "İndirim",
-     season:"SUMMER 2026",
-    description: "%40’a varan fırsatlar",
-    cta: "Hemen Bak",
-  },
-  {
-    id: 3,
-    src: "https://picsum.photos/1200/800?3",
-    title: "Özel Seçim",
-     season:"SUMMER 2026",
-    description: "Editörün favorileri",
-    cta: "İncele",
-  },
-];
+import ButtonCta from "./ButtonCta";
 
 
 
-
-export default function Carousel() {
+export default function Carousel({ slides }) {
   const [index, setIndex] = useState(0);
 
   const next = () =>
@@ -43,7 +15,7 @@ export default function Carousel() {
     );
 
   return (
-    <div className="relative w-full h-screen overflow-x-hidden">
+    <div className="relative w-full h-screen overflow-x-hidden ">
        <div className="overflow-hidden h-full">
     <div
       className="flex h-full transition-transform duration-500 ease-in-out"
@@ -52,7 +24,7 @@ export default function Carousel() {
       {slides.map((slide) => (
         <div
           key={slide.id}
-          className="relative w-full h-full shrink-0"
+          className={"relative w-full h-full shrink-0 " + slide.backgroundColor}
         >
           {/* Image */}
           <img
@@ -76,9 +48,9 @@ export default function Carousel() {
               {slide.description}
             </p>
 
-            <button className="rounded-[5px] px-6 py-3 bg-success text-white font-semibold hover:bg-white hover:text-success transition">
+            <ButtonCta className="rounded-[5px] px-6 py-3 bg-success text-white font-semibold hover:bg-white hover:text-success transition">
               {slide.cta}
-            </button>
+            </ButtonCta>
           </div>
         </div>
       ))}

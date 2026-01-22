@@ -1,6 +1,6 @@
 const ProductCard = ({ product }) => {
   return (
-    <div className="flex flex-col items-center max-w-60.25 font-montserrat font-bold gap-3" > 
+    <div className="flex flex-col items-center max-w-80.25 font-montserrat font-bold gap-3" > 
     
     <img src={product.image} alt={product.name} />
     <h2 className="font-bold  text-base">{product.name}</h2>
@@ -12,8 +12,8 @@ const ProductCard = ({ product }) => {
   
 <div className="flex gap-1">
 
-  <span className="rounded-full bg-[#23A6F0] p-2"></span>
-  <span className="rounded-full bg-[#23856D] p-2"></span>
+  <span className="rounded-full bg-header-turkuaz p-2"></span>
+  <span className="rounded-full bg-reduced-price-color p-2"></span>
   <span className="rounded-full bg-[#E77C40] p-2"></span>
   <span className="rounded-full bg-[#252B42] p-2"></span>
  

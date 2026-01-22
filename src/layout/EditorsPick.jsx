@@ -34,9 +34,9 @@ export default function EditorsPick() {
             alt="Women"
             className="w-full h-full object-cover"
           />
-          <Button className="absolute bottom-6 left-6 bg-white px-6 py-2 text-sm font-bold">
+          <button className="absolute bottom-6 left-6 bg-white px-6 py-2 text-sm font-bold">
             WOMEN
-          </Button>
+          </button>
         </div>
 
         {/* Right Column */}

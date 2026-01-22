@@ -60,7 +60,7 @@ const Bestsellers = () => {
             reducedPrice: "$19.99",
             image: "/product8.jpg" }]    
   return (
-    <section className="max-w-7xl mx-auto gap-y-20 px-4 py-20  ">  
+    <section className="max-w-7xl mx-auto px-4 py-20 flex flex-col items-center">  
     
        <div className="text-center mb-12">
         <h2 className="text-2xl font-bold tracking-wide">
@@ -71,7 +71,7 @@ const Bestsellers = () => {
         </p>
       </div>
 
-      <div className="md:grid md:grid-cols-4 flex flex-col items-center">
+      <div className="md:max-w-5xl md:grid md:grid-cols-4 gap-4 flex flex-col items-center">
     {products.map((product) => <ProductCard key={product.id} product={product} />)}
     </div>
      </section>                       
