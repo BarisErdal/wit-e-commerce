@@ -5,6 +5,7 @@ import { slides, slides2, callToBuy, featuredProducts } from "../data/data";
 import CallToBuy from "./CallToBuy";
 import FeaturedProducts from "./FeaturedProducts";
 import Footer from "./Footer";
+import Slider from "../components/Slider";
 
 const PageContent = () => {
   return (
@@ -12,11 +13,8 @@ const PageContent = () => {
       <Carousel slides={slides} />
       <EditorsPick />
       <Bestsellers />
-      <Carousel
-        slides={slides2}
-        imgClasses="max-h-[1] w-auto"
-        height="h-[200vh]"
-      />
+ 
+      <Slider slides={slides2}/>
       <CallToBuy data={callToBuy} />
       <FeaturedProducts data={featuredProducts} />
       <Footer/>

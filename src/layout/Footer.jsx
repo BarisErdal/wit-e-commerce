@@ -1,19 +1,19 @@
 const Footer = () => {
   return (
     <footer>
-      <div className="flex flex-col p-11 mx-auto bg-light-gray">
+      <div className="flex flex-col p-11 mx-auto bg-light-gray md:flex md:flex-row md:justify-between md:px-30">
         <h3 className="font-bold font-montserrat text-2xl text-logo-blue mb-3">
           Bandage
         </h3>
-        <div className="flex gap-5">
+        <div className="flex gap-5 md:max-h-7">
           <img src="./facebook.png" alt="facebook" />
           <img src="./instagram.png" alt="instagram" />
           <img src="./twitter.png" alt="twitter" />
         </div>
       </div>
 
-      <div className="font-montserrat text-sm font-bold text-second-text p-11 mx-auto">
-        <div className="flex flex-col gap-2.5 mb-8">
+      <div className="font-montserrat text-sm font-bold text-second-text p-11 mx-auto md:px-30 md:flex md:flex-row md:justify-between">
+        <div className="flex flex-col gap-2.5 mb-8 ">
           <h5 className="text-base text-logo-blue mb-2.5">Company Info</h5>
           <p>About Us</p>
           <p>Carrier</p>
