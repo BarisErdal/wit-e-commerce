@@ -4,6 +4,7 @@ import EditorsPick from "./EditorsPick";
 import { slides, slides2, callToBuy, featuredProducts } from "../data/data";
 import CallToBuy from "./CallToBuy";
 import FeaturedProducts from "./FeaturedProducts";
+import Footer from "./Footer";
 
 const PageContent = () => {
   return (
@@ -18,6 +19,7 @@ const PageContent = () => {
       />
       <CallToBuy data={callToBuy} />
       <FeaturedProducts data={featuredProducts} />
+      <Footer/>
     </>
   );
 };
