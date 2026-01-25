@@ -91,3 +91,39 @@ export const featuredProducts=[
   },
 
 ]
+
+
+export const shopCategories = [
+
+{
+  title:"CLOTHS",
+  items: 3,
+  src:'/shop/cloth1.png'
+
+},
+{
+  title:"CLOTHS",
+  items: 4,
+src:'/shop/cloth2.png'
+},
+{
+  title:"CLOTHS",
+  items: 5,
+  src:'/shop/cloth3.png'
+
+},
+{
+  title:"CLOTHS",
+  items: 7,
+  src:'/shop/cloth4.png'
+
+},
+{
+  title:"CLOTHS",
+  items: 6,
+  src:'/shop/cloth5.png'
+
+}
+
+
+]

@@ -6,6 +6,7 @@ import {
   Menu,
   X,  Heart, Instagram, Youtube, Facebook, Twitter,Phone
 } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
@@ -37,8 +38,8 @@ export default function Header() {
 
           {/* Desktop Menu */}
           <nav className="hidden md:flex gap-8 text-sm font-medium">
-         <a href="#" className="hover:text-success">Home</a>
-            <a href="#" className="hover:text-success">Shop</a>
+         <Link to="/" className="hover:text-success">Home</Link>
+            <Link to='/shop' className="hover:text-success">Shop</Link>
             <a href="#" className="hover:text-success">About</a>
              <a href="#" className="hover:text-success">Blog</a>
               <a href="#" className="hover:text-success">Pages</a>
@@ -88,8 +89,8 @@ export default function Header() {
       {open && (
         <div className="md:hidden bg-white border-t">
           <nav className="flex flex-col px-4 py-4 gap-4 text-sm">
-              <a href="#" className="hover:text-success">Home</a>
-            <a href="#" className="hover:text-success">Shop</a>
+              <Link to='/' onClick={()=>{ setOpen(false)}} className="hover:text-success">Home</Link>
+            <Link to='shop'  onClick={()=>{ setOpen(false)}} className="hover:text-success">Shop</Link>
             <a href="#" className="hover:text-success">About</a>
              <a href="#" className="hover:text-success">Blog</a>
               <a href="#" className="hover:text-success">Pages</a>

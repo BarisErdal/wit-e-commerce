@@ -4,7 +4,7 @@ import EditorsPick from "./EditorsPick";
 import { slides, slides2, callToBuy, featuredProducts } from "../data/data";
 import CallToBuy from "./CallToBuy";
 import FeaturedProducts from "./FeaturedProducts";
-import Footer from "./Footer";
+
 import Slider from "../components/Slider";
 
 const PageContent = () => {
@@ -17,7 +17,7 @@ const PageContent = () => {
       <Slider slides={slides2}/>
       <CallToBuy data={callToBuy} />
       <FeaturedProducts data={featuredProducts} />
-      <Footer/>
+      
     </>
   );
 };
