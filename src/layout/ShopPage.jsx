@@ -1,9 +1,15 @@
-import { ChevronRight,ChevronDown, LayoutGrid, ListChecks } from "lucide-react";
-import { shopCategories } from "../data/data";
+import {
+  ChevronRight,
+  ChevronDown,
+  LayoutGrid,
+  ListChecks,
+} from "lucide-react";
+import { shopCategories, shopProducts, brandsData } from "../data/data";
 import Cloth from "../components/Cloth";
 
 import { useState } from "react";
 import ButtonCta from "../components/ButtonCta";
+import ProductCard from "../components/ProductCard";
 
 const options = ["Popularity", "Moda", "Ev & Yaşam", "Spor"];
 
@@ -30,19 +36,31 @@ const ShopPage = () => {
           </div>
         </div>
 
-        <div className=" flex flex-col md:flex md:flex-row md:max-w-272 mx-auto  gap-5">
-          {shopCategories.map((cat, i) => (
-            <Cloth key={i} data={cat} />
-          ))}
-        </div>
+       <div className="
+  flex flex-col md:flex-row
+  gap-5
+  max-w-7xl
+  mx-auto
+  px-4
+">
+  {shopCategories.map((cat, i) => (
+    <Cloth key={i} data={cat} />
+  ))}
+</div>
       </div>
 
-      <div className="flex flex-col justify-between gap-y-6 max-w-7xl mx-auto items-center mt-12 md:flex md:flex-row">
-        <h3 className="text-second-text text-sm font-bold">Showing all 12 Results</h3>
+      <div className="flex flex-col justify-between gap-y-6 max-w-7xl mx-auto items-center mt-12 md:flex md:flex-row md:max-w-262.5 md:mx-20">
+        <h3 className="text-second-text text-sm font-bold">
+          Showing all 12 Results
+        </h3>
         <div className="flex items-center gap-4">
           <h4 className="text-second-text text-sm font-bold">Views: </h4>
-          <LayoutGrid className="text-dark-bg" size={16}/>
-          <ListChecks className="text-second-text" size={16}/>
+          <div className="border rounded-[5px] p-4 border-light2-gray">
+            <LayoutGrid className="text-dark-bg " size={16} />
+          </div>
+          <div className="border rounded-[5px] p-4 border-light2-gray">
+            <ListChecks className="text-second-text" size={16} />
+          </div>
         </div>
         <div>
           {/* DROPDOWN MENU   */}
@@ -82,9 +100,53 @@ const ShopPage = () => {
             )}
           </div>
 
-          <ButtonCta className='ml-4'>Filter</ButtonCta>
+          <ButtonCta className="ml-4">Filter</ButtonCta>
         </div>
       </div>
+
+      {/* shop products */}
+  
+    <div className="
+  mx-auto
+  mt-15
+  w-full
+  max-w-7xl
+  px-4
+
+  flex flex-col gap-y-6
+  md:grid md:grid-cols-4 md:gap-4
+">
+  {shopProducts.map((p, i) => (
+    <ProductCard key={i} product={p} />
+  ))}
+</div>
+
+
+<div className="
+  grid
+  grid-cols-2
+  sm:grid-cols-3
+  md:grid-cols-4
+  lg:grid-cols-5
+  gap-6
+  place-items-center
+  mt-20
+  max-w-7xl
+  mx-auto
+  px-4
+">
+  {brandsData.map((b, i) => (
+    <img
+      key={i}
+      src={b.src}
+      alt=""
+      className="w-24 sm:w-28 md:w-32 lg:w-36 h-auto object-contain"
+    />
+  ))}
+</div>
+
+
+   
     </section>
   );
 };
