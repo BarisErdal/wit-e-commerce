@@ -4,10 +4,13 @@ import { ToastContainer } from "react-toastify";
 import PageContent from "./layout/PageContent";
 import Header from "./layout/Header";
 import ShopPage from "./layout/ShopPage";
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route } from "react-router-dom";
 import Footer from "./layout/Footer";
+import ProductDetailPage from "./layout/ProductDetailPage";
 
 function App() {
+
+  
   return (
     <>
       <Header />
@@ -17,11 +20,17 @@ function App() {
           <PageContent />
         </Route>
 
+<Route path="/shop/:productId">
+          <ProductDetailPage />
+        </Route>
+
         <Route path="/shop">
           <ShopPage />
         </Route>
+
+
       </Switch>
-      <Footer/>
+      <Footer />
       <ToastContainer />
     </>
   );

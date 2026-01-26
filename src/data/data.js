@@ -206,6 +206,27 @@ export const shopProducts = [
     reducedPrice: "$19.99",
     image: "/shop/p12.jpg",
   },
+    {
+    name: "Graphic Design",
+    detail: "English Department",
+    price: "$29.99",
+    reducedPrice: "$19.99",
+    image: "/shop/p12.jpg",
+  },
+    {
+    name: "Graphic Design",
+    detail: "English Department",
+    price: "$29.99",
+    reducedPrice: "$19.99",
+    image: "/shop/p12.jpg",
+  },
+    {
+    name: "Graphic Design",
+    detail: "English Department",
+    price: "$29.99",
+    reducedPrice: "$19.99",
+    image: "/shop/p12.jpg",
+  },
 ];
 
 

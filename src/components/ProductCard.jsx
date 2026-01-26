@@ -1,6 +1,15 @@
-const ProductCard = ({ product }) => {
+import { Link } from "react-router-dom";
+
+
+
+const ProductCard = ({ product,id }) => {
+
+
+
   return (
- <div className="
+ <Link to={`/shop/${id}`}
+ 
+ className="
       flex flex-col
       items-center
       w-full
@@ -34,7 +43,7 @@ const ProductCard = ({ product }) => {
         <span className="rounded-full bg-[#E77C40] p-2"></span>
         <span className="rounded-full bg-[#252B42] p-2"></span>
       </div>
-    </div>
+    </Link>
     );
     }
 
