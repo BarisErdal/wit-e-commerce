@@ -16,6 +16,7 @@
   --color-light-gray: #FAFAFA;
   --color-button-gray: #F9F9F9;
   --color-light2-gray:#ECECEC;
+  --color-light3-gray: #858585;
 
 
 
@@ -23,4 +24,6 @@
 }
 
 @custom-variant dark (&:where(.dark, .dark *));
-
+* {
+  outline: 1px solid red;
+}
