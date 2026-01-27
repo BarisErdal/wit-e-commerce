@@ -7,14 +7,17 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { useState } from "react";
 import { Star, Heart, Eye, ShoppingCart } from "lucide-react";
 import ButtonCta from "./ButtonCta";
+import "./ProductDetailCard.css";
 
 const ProductDetailCard = () => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
+  const images = ["/shop/p1.jpg", "/shop/p2.jpg", "/shop/p3.jpg"];
+
   return (
-    <div className="md:flex md:max-w-6xl md:mx-auto md:gap-8 overflow-hidden">
+    <div className="md:flex md:max-w-6xl md:mx-auto md:gap-8 overflow-hidden pt-20">
       {/* LEFT – IMAGE SLIDER */}
-      <div className="p-5 md:max-w-[420px] w-full min-w-0">
+      <div className="p-5 md:max-w-105 w-full min-w-0">
         <Swiper
           spaceBetween={10}
           navigation
@@ -22,19 +25,18 @@ const ProductDetailCard = () => {
           modules={[FreeMode, Navigation, Thumbs]}
           className="w-full"
         >
-          {["/shop/p1.jpg", "/shop/p2.jpg", "/shop/p3.jpg"].map(
-            (img, i) => (
-              <SwiperSlide key={i}>
-                <img
-                  src={img}
-                  alt="product"
-                  className="w-full max-w-full object-cover rounded-md"
-                />
-              </SwiperSlide>
-            )
-          )}
+          {images.map((img, i) => (
+            <SwiperSlide key={i}>
+              <img
+                src={img}
+                alt="product"
+                className="w-full max-w-full object-cover rounded-md"
+              />
+            </SwiperSlide>
+          ))}
         </Swiper>
 
+        {/* THUMBNAILS */}
         <Swiper
           onSwiper={setThumbsSwiper}
           spaceBetween={10}
@@ -42,19 +44,17 @@ const ProductDetailCard = () => {
           freeMode
           watchSlidesProgress
           modules={[FreeMode, Navigation, Thumbs]}
-          className="mt-6 w-full"
+          className="mySwiper mt-6 w-full"
         >
-          {["/shop/p1.jpg", "/shop/p2.jpg", "/shop/p3.jpg"].map(
-            (img, i) => (
-              <SwiperSlide key={i}>
-                <img
-                  src={img}
-                  alt="thumb"
-                  className="w-full max-w-full object-cover rounded-md cursor-pointer"
-                />
-              </SwiperSlide>
-            )
-          )}
+          {images.map((img, i) => (
+            <SwiperSlide key={i}>
+              <img
+                src={img}
+                alt="thumb"
+                className="w-full max-w-full object-cover rounded-md cursor-pointer"
+              />
+            </SwiperSlide>
+          ))}
         </Swiper>
       </div>
 
@@ -88,7 +88,6 @@ const ProductDetailCard = () => {
           sent. RELIT official consequent door ENIM RELIT Mollie.
         </p>
 
-        {/* COLOR DOTS */}
         <div className="flex gap-3 mb-10">
           <span className="w-8 h-8 rounded-full bg-header-turkuaz" />
           <span className="w-8 h-8 rounded-full bg-reduced-price-color" />
@@ -96,7 +95,6 @@ const ProductDetailCard = () => {
           <span className="w-8 h-8 rounded-full bg-[#252B42]" />
         </div>
 
-        {/* ACTIONS */}
         <div className="flex flex-wrap items-center gap-4">
           <ButtonCta variant="primary">Select Options</ButtonCta>
           <Heart className="cursor-pointer" />
