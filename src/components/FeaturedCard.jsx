@@ -8,8 +8,8 @@ const FeaturedCard = ({ fData }) => {
 
         <div className="px-6">
       <ul className="flex gap-4 mt-6 mb-2.5">
-        {fData.links.map((l) => (
-          <li className="font-normal hover:text-disabled-element-color text-xs text-second-text cursor-pointer">
+        {fData.links.map((l,i) => (
+          <li key={i} className="font-normal hover:text-disabled-element-color text-xs text-second-text cursor-pointer">
             {l}
           </li>
         ))}

@@ -43,7 +43,7 @@ export default function Header() {
             <a href="#" className="hover:text-success">About</a>
              <a href="#" className="hover:text-success">Blog</a>
               <a href="#" className="hover:text-success">Pages</a>
-            <a href="#" className="hover:text-success">Contact</a>
+            <Link to='/contact' className="hover:text-success">Contact</Link>
           </nav>
 
           {/* Right Icons */}
@@ -90,11 +90,11 @@ export default function Header() {
         <div className="md:hidden bg-white border-t">
           <nav className="flex flex-col px-4 py-4 gap-4 text-sm">
               <Link to='/' onClick={()=>{ setOpen(false)}} className="hover:text-success">Home</Link>
-            <Link to='shop'  onClick={()=>{ setOpen(false)}} className="hover:text-success">Shop</Link>
+            <Link to='/shop'  onClick={()=>{ setOpen(false)}} className="hover:text-success">Shop</Link>
             <a href="#" className="hover:text-success">About</a>
              <a href="#" className="hover:text-success">Blog</a>
               <a href="#" className="hover:text-success">Pages</a>
-            <a href="#" className="hover:text-success">Contact</a>
+            <Link to='/contact' onClick={()=>{ setOpen(false)}} className="hover:text-success">Contact</Link>
             <div className="flex gap-4 pt-4 border-t">
               <button className="flex items-center gap-2">
                 <User size={18} /> Login

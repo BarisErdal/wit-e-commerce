@@ -9,7 +9,7 @@ const ProductDetailPage = () => {
  
  
   return (
-    <section className="mt-25">
+    <section className="md:mt-15">
       <ProductDetailCard />
       <Tabs tabs={tabs} />
 

@@ -7,26 +7,30 @@ import ShopPage from "./layout/ShopPage";
 import { Switch, Route } from "react-router-dom";
 import Footer from "./layout/Footer";
 import ProductDetailPage from "./layout/ProductDetailPage";
+import ContactPage from "./layout/ContactPage";
 
 function App() {
-
-  
   return (
     <>
       <Header />
 
       <Switch>
+
+        <Route path="/contact">
+          <ContactPage />
+        </Route>
         <Route path="/" exact>
           <PageContent />
         </Route>
 
-<Route path="/shop/:productId">
+        <Route path="/shop/:productId">
           <ProductDetailPage />
         </Route>
 
         <Route path="/shop">
           <ShopPage />
         </Route>
+
 
 
       </Switch>
