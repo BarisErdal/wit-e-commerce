@@ -13,7 +13,7 @@ const ProductDetailPage = () => {
       <ProductDetailCard />
       <Tabs tabs={tabs} />
 
-<div className="md:max-w-5xl md:grid md:grid-cols-4 gap-4 flex flex-col items-center mx-auto">
+<div className="md:max-w-5xl md:grid md:grid-cols-4 gap-8 flex flex-col items-center mt-10 mx-auto">
     {productDetailBestseller.map((product) => <ProductCard key={product.id} product={product} />)}
     </div>
 

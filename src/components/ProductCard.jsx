@@ -10,20 +10,15 @@ const ProductCard = ({ product,id }) => {
  <Link to={`/shop/${id}`}
  
  className="
-      flex flex-col
-      items-center
-      w-full
-      max-w-full
-      md:max-w-80.25
-      font-montserrat
-      font-bold
-      gap-3
+   flex flex-col items-center w-full font-montserrat font-bold gap-3
     ">
+      <div className="w-full aspect-3/4 overflow-hidden bg-gray-100">
       <img
         src={product.image}
         alt={product.name}
-        className="w-full h-auto object-contain"
+        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
       />
+      </div>
 
       <h2 className="text-base text-center">{product.name}</h2>
       <p className="text-sm text-second-text text-center">
