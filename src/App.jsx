@@ -8,6 +8,7 @@ import { Switch, Route } from "react-router-dom";
 import Footer from "./layout/Footer";
 import ProductDetailPage from "./layout/ProductDetailPage";
 import ContactPage from "./layout/ContactPage";
+import TeamPage from "./layout/TeamPage";
 
 function App() {
   return (
@@ -29,6 +30,10 @@ function App() {
 
         <Route path="/shop">
           <ShopPage />
+        </Route>
+
+        <Route path="/team">
+          <TeamPage />
         </Route>
 
 
