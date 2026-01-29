@@ -15,7 +15,7 @@ const ButtonCta = ({
     danger:
       "bg-red-500 text-white border-transparent hover:bg-white hover:text-red-500 hover:border-red-500",
     outline:
-      "bg-transparent text-gray-800 border-gray-300 hover:bg-gray-100",
+      "bg-transparent text-white border-gray-300 hover:bg-gray-100 hover:text-banner-blue",
   };
 
   return (

@@ -25,7 +25,7 @@ const Footer = () => {
 
         <div className="flex flex-col gap-2.5 mb-8">
           <h5 className="text-base text-logo-blue mb-2.5">Legal</h5>
-          <Link to='/team'>Team Page</Link>
+          <Link to='/team' onClick={()=>{ window.scrollTo({ top: 0, behavior: "smooth" });}}>Team Page</Link>
           <p>Carrier</p>
           <p>We are hiring</p>
           <p>Blog</p>

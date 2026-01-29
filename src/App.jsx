@@ -9,6 +9,7 @@ import Footer from "./layout/Footer";
 import ProductDetailPage from "./layout/ProductDetailPage";
 import ContactPage from "./layout/ContactPage";
 import TeamPage from "./layout/TeamPage";
+import AboutUsPage from "./layout/AboutUsPage";
 
 function App() {
   return (
@@ -36,6 +37,9 @@ function App() {
           <TeamPage />
         </Route>
 
+<Route path="/aboutus">
+          <AboutUsPage />
+        </Route>
 
 
       </Switch>
