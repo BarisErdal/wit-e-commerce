@@ -91,7 +91,7 @@ export default function Header() {
           <nav className="flex flex-col px-4 py-4 gap-4 text-sm">
               <Link to='/' onClick={()=>{ setOpen(false)}} className="hover:text-success">Home</Link>
             <Link to='/shop'  onClick={()=>{ setOpen(false)}} className="hover:text-success">Shop</Link>
-            <Link to='aboutus' className="hover:text-success">About</Link>
+            <Link to='aboutus' onClick={()=>{ setOpen(false)}} className="hover:text-success">About</Link>
              <a href="#" className="hover:text-success">Blog</a>
               <a href="#" className="hover:text-success">Pages</a>
             <Link to='/contact' onClick={()=>{ setOpen(false)}} className="hover:text-success">Contact</Link>

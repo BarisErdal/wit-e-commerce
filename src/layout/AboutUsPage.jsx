@@ -24,7 +24,7 @@ const numbersOfPartners = [
 const AboutUsPage = () => {
   const firstThree = teamMembers.slice(0, 3);
   return (
-    <div className="mt-5">
+    <div className="mt-25 md:mt-5">
       <div className="flex flex-col px-17.5 gap-y-10 md:flex md:flex-row md:justify-center md:items-center">
         <div className="md:max-w-110">
           <h2 className=" font-montserrat text-[40px] font-bold text-dark-bg text-center mb-2.5 md:mb-10">
