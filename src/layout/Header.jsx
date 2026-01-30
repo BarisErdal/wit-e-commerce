@@ -34,7 +34,7 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
-          <div className="text-2xl font-bold font-montserrat text-logo-blue">Bandage</div>
+          <Link to='/' className="text-2xl font-bold font-montserrat text-logo-blue">Bandage</Link>
 
           {/* Desktop Menu */}
           <nav className="hidden md:flex gap-8 text-sm font-medium">
