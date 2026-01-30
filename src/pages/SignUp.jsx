@@ -85,14 +85,14 @@ theme: "light",
   };
 
   return (
-    <div className="max-w-md mx-auto p-6 md:mt-30">
-      <h2 className="text-2xl font-bold mb-6">Sign Up</h2>
+    <div className="max-w-md mx-auto p-6 mt-25 md:mt-45">
+      <h2 className="text-3xl font-montserrat text-dark-bg text-center font-bold mb-6">Sign Up</h2>
 
       {apiError && (
         <p className="text-red-500 text-sm mb-4">{apiError}</p>
       )}
 
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+      <form onSubmit={handleSubmit(onSubmit)} className=" flex flex-col space-y-6">
         {/* NAME */}
         <input
           placeholder="Name"
@@ -100,7 +100,7 @@ theme: "light",
             required: "Name is required",
             minLength: { value: 3, message: "Min 3 characters" },
           })}
-          className="input"
+          className="input border hover:border-dark-bg border-second-text rounded-md px-4 py-1"
         />
         {errors.name && <p className="error">{errors.name.message}</p>}
 
@@ -114,7 +114,7 @@ theme: "light",
               message: "Invalid email",
             },
           })}
-          className="input"
+          className="input border hover:border-dark-bg border-second-text rounded-md px-4 py-1"
         />
         {errors.email && <p className="error">{errors.email.message}</p>}
 
@@ -131,7 +131,7 @@ theme: "light",
                 "Min 8 chars, uppercase, lowercase, number & special char",
             },
           })}
-          className="input"
+          className="input border hover:border-dark-bg border-second-text rounded-md px-4 py-1"
         />
         {errors.password && (
           <p className="error">{errors.password.message}</p>
@@ -145,7 +145,7 @@ theme: "light",
             validate: (value) =>
               value === password || "Passwords do not match",
           })}
-          className="input"
+          className="input border hover:border-dark-bg border-second-text rounded-md px-4 py-1"
         />
         {errors.confirmPassword && (
           <p className="error">{errors.confirmPassword.message}</p>
