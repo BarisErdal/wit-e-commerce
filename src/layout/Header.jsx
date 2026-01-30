@@ -51,9 +51,9 @@ export default function Header() {
 
 
                   {/* Login */}
-            <button className="text-header-turkuaz  items-center gap-1 hidden md:flex">
+            <Link to ='/signup' className="text-header-turkuaz  items-center gap-1 hidden md:flex">
               Login/Register<User size={20} />
-            </button>
+            </Link>
 
             {/* Search */}
             <button className="text-header-turkuaz ">

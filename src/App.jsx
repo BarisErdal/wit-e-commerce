@@ -10,6 +10,7 @@ import ProductDetailPage from "./layout/ProductDetailPage";
 import ContactPage from "./layout/ContactPage";
 import TeamPage from "./layout/TeamPage";
 import AboutUsPage from "./layout/AboutUsPage";
+import SignUp from "./pages/SignUp";
 
 function App() {
   return (
@@ -17,7 +18,6 @@ function App() {
       <Header />
 
       <Switch>
-
         <Route path="/contact">
           <ContactPage />
         </Route>
@@ -37,9 +37,16 @@ function App() {
           <TeamPage />
         </Route>
 
-<Route path="/aboutus">
+        <Route path="/aboutus">
           <AboutUsPage />
         </Route>
+
+        
+        <Route path="/signup">
+          <SignUp />
+        </Route>
+
+
 
 
       </Switch>
