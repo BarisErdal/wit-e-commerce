@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import api from "../api/axios";
 import { toast } from "react-toastify";
 import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const SignUp = () => {
   const history = useHistory();
@@ -218,6 +219,8 @@ theme: "light",
             "Sign Up"
           )}
         </button>
+
+        <h4> Please <Link to='/login' className="px-4 py-2 rounded-xs font-bold text-dark-bg font font-montserrat hover:bg-dark-bg hover:text-white">LOGIN</Link> if you have already been signed up</h4>
       </form>
     </div>
   );

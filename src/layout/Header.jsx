@@ -7,10 +7,12 @@ import {
   X,  Heart, Instagram, Youtube, Facebook, Twitter,Phone
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import Gravatar from "react-gravatar";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
-
+const user = useSelector((state) => state.client.user);
 
 
 
@@ -44,16 +46,33 @@ export default function Header() {
              <a href="#" className="hover:text-success">Blog</a>
               <a href="#" className="hover:text-success">Pages</a>
             <Link to='/contact' className="hover:text-success">Contact</Link>
+
+
+
+
           </nav>
 
           {/* Right Icons */}
           <div className="flex items-center gap-4">
 
-
-                  {/* Login */}
-            <Link to ='/signup' className="text-header-turkuaz  items-center gap-1 hidden md:flex">
+{user?.email ? (
+  <div className="flex items-center gap-2">
+    <Gravatar
+      email={user.email}
+      size={40}
+      className="rounded-full"
+    />
+    <span>{user.name}</span>
+  </div>
+) : (
+   <Link to ='/signup' className="text-header-turkuaz  items-center gap-1 hidden md:flex">
               Login/Register<User size={20} />
             </Link>
+)}
+
+
+              
+          
 
             {/* Search */}
             <button className="text-header-turkuaz ">
