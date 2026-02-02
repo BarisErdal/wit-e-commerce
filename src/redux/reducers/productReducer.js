@@ -9,7 +9,9 @@ import {
 } from "../actionTypes";
 
 const initialState = {
-  categories: [],
+  categories: [  
+   
+    ],
   productList: [],
   total: 0,
   limit: 25,

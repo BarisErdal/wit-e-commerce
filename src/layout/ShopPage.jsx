@@ -1,10 +1,11 @@
 import { ChevronRight, LayoutGrid, ListChecks } from "lucide-react";
-import { shopCategories, shopProducts, brandsData } from "../data/data";
+import { shopProducts, brandsData } from "../data/data";
 import Cloth from "../components/Cloth";
 import { useState, useEffect } from "react";
 import ButtonCta from "../components/ButtonCta";
 import ProductCard from "../components/ProductCard";
 import Dropdown from "../components/Dropdown";
+import { useSelector } from "react-redux";
 
 const options = ["Popularity", "Moda", "Ev & Yaşam", "Spor"];
 
@@ -18,6 +19,10 @@ const ShopPage = () => {
   const endIndex = startIndex + ITEMS_PER_PAGE;
 
   const currentProducts = shopProducts.slice(startIndex, endIndex);
+
+    const categories = useSelector((s) => s.product.categories);
+const shopCategories=categories.sort((a, b) => b.rating - a.rating).slice(0, 5)
+
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });

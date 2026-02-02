@@ -17,6 +17,7 @@ const Login = () => {
   } = useForm();
 
   const onSubmit = (data) => {
+   // if(data.remember === true) {}
     dispatch(
       loginUser(
         data,
@@ -27,6 +28,9 @@ const Login = () => {
       )
     );
   };
+
+
+  
 
   return (
     <div className="max-w-md mx-auto mt-20 p-6  md:mt-35">

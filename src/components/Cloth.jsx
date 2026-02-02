@@ -2,9 +2,9 @@ const Cloth = ({ data }) => {
   return (
  <div className="relative font-montserrat w-full max-w-full overflow-hidden">
       <img
-        src={data.src}
+        src={data.img}
         alt={data.title}
-        className="w-full h-auto object-cover"
+        className="w-full h-auto object-cover aspect-3/4"
       />
 
       <div className="absolute inset-0 flex flex-col items-center justify-center">
@@ -12,7 +12,7 @@ const Cloth = ({ data }) => {
           {data.title}
         </h4>
         <p className="font-bold text-sm text-white">
-          {data.items} items
+          {data.rating} items
         </p>
       </div>
     </div>

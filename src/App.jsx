@@ -12,8 +12,28 @@ import TeamPage from "./layout/TeamPage";
 import AboutUsPage from "./layout/AboutUsPage";
 import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { restoreUser } from "./redux/actions/clientActions";
+import { fetchCategories } from "./redux/actions/productActions";
+
 
 function App() {
+
+ const dispatch = useDispatch();
+
+
+  useEffect(() => {
+    dispatch(restoreUser());
+   
+  }, [dispatch]);
+
+    useEffect(() => {
+   
+    dispatch(fetchCategories());
+  }, [dispatch]);
+
+
   return (
     <>
       <Header />
