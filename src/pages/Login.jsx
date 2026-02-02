@@ -29,7 +29,7 @@ const Login = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-20 p-6 border rounded md:mt-35">
+    <div className="max-w-md mx-auto mt-20 p-6  md:mt-35">
       <h2 className="text-2xl font-bold mb-6">Login</h2>
 
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
@@ -37,7 +37,7 @@ const Login = () => {
         <input
           type="email"
           placeholder="Email"
-          className="border p-2 rounded"
+          className="border border-dark-bg p-2 rounded"
           {...register("email", {
             required: "Email is required",
             pattern: {
@@ -54,7 +54,7 @@ const Login = () => {
         <input
           type="password"
           placeholder="Password"
-          className="border p-2 rounded"
+          className="border border-dark-bg  p-2 rounded"
           {...register("password", { required: true })}
         />
 

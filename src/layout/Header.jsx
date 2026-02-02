@@ -54,7 +54,7 @@ const user = useSelector((state) => state.client.user);
 
           {/* Right Icons */}
           <div className="flex items-center gap-4">
-
+<div className="hidden md:flex">
 {user?.email ? (
   <div className="flex items-center gap-2">
     <Gravatar
@@ -69,7 +69,7 @@ const user = useSelector((state) => state.client.user);
               Login/Register<User size={20} />
             </Link>
 )}
-
+</div>
 
               
           
@@ -115,9 +115,18 @@ const user = useSelector((state) => state.client.user);
               <a href="#" className="hover:text-success">Pages</a>
             <Link to='/contact' onClick={()=>{ setOpen(false)}} className="hover:text-success">Contact</Link>
             <div className="flex gap-4 pt-4 border-t">
-              <button className="flex items-center gap-2">
-                <User size={18} /> Login
-              </button>
+              {user?.email ? (
+  <div className="flex items-center gap-2">
+    <Gravatar
+      email={user.email}
+      size={40}
+      className="rounded-full"
+    />
+    <span>{user.name}</span>
+  </div>
+) :<Link to="/signup" onClick={()=>{ setOpen(false)}} className="flex items-center gap-2">
+                <User size={18} /> Login/Register
+              </Link>}
               <button className="flex items-center gap-2">
                 <ShoppingCart size={18} /> Cart
               </button>
