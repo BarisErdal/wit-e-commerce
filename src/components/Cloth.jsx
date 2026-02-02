@@ -1,6 +1,9 @@
+import { Link } from "react-router-dom";
+
+
 const Cloth = ({ data }) => {
   return (
- <div className="relative font-montserrat w-full max-w-full overflow-hidden">
+ <Link to={`/shop/${data.gender === "k" ? "kadin" : "erkek"}/${data.code.split(":")[1]}/${data.id}`} className="relative font-montserrat w-full max-w-full overflow-hidden">
       <img
         src={data.img}
         alt={data.title}
@@ -15,7 +18,7 @@ const Cloth = ({ data }) => {
           {data.rating} items
         </p>
       </div>
-    </div>
+    </Link>
   );
 };
 

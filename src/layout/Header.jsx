@@ -21,6 +21,12 @@ export default function Header() {
   const [open, setOpen] = useState(false);
   const user = useSelector((state) => state.client.user);
   const dispatch= useDispatch();
+const [mobileShopOpen, setMobileShopOpen] = useState(false);
+
+
+const categories = useSelector(s=>s.product.categories)
+  const women = categories.filter((c) => c.gender === "k");
+const men = categories.filter((c) => c.gender === "e");
 
   return (
     <header className="fixed top-0 left-0 w-full z-50 bg-white">
@@ -52,9 +58,55 @@ export default function Header() {
             <Link to="/" className="hover:text-success">
               Home
             </Link>
-            <Link to="/shop" className="hover:text-success">
-              Shop
-            </Link>
+           
+
+
+
+
+
+
+<div className="relative group">
+  <Link to='/shop' >Shop</Link>
+
+  <div className="absolute hidden group-hover:flex bg-white shadow-lg p-6 gap-x-30">
+    {/* Kadın */}
+    <div className=" flex flex-col gap-y-4">
+      <h4 className="font-semibold mb-5">Kadın</h4>
+      {women.map((cat) => (
+        <Link
+          key={cat.id}
+          to={`/shop/kadin/${cat.code.split(":")[1]}/${cat.id}`}
+          className="block text-light3-gray  hover:text-dark-bg mb-1"
+        >
+          {cat.title}
+        </Link>
+      ))}
+    </div>
+
+    {/* Erkek */}
+    <div className=" flex flex-col gap-y-4">
+      <h4 className="font-semibold mb-5">Erkek</h4>
+      {men.map((cat) => (
+        <Link
+          key={cat.id}
+          to={`/shop/erkek/${cat.code.split(":")[1]}/${cat.id}`}
+          className="block text-light3-gray hover:text-dark-bg mb-1"
+        >
+          {cat.title}
+        </Link>
+      ))}
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
             <Link to="aboutus" className="hover:text-success">
               About
             </Link>
@@ -132,15 +184,88 @@ export default function Header() {
             >
               Home
             </Link>
-            <Link
-              to="/shop"
-              onClick={() => {
-                setOpen(false);
-              }}
-              className="hover:text-success"
-            >
-              Shop
-            </Link>
+            
+
+
+
+
+
+
+
+
+
+
+
+
+<div>
+  <button
+    onClick={() => setMobileShopOpen(!mobileShopOpen)}
+    className="flex w-full items-center justify-between hover:text-success"
+  >
+    <span>Shop</span>
+    <span>{mobileShopOpen ? "−" : "+"}</span>
+  </button>
+
+  {mobileShopOpen && (
+    <div className="mt-3 ml-4 flex flex-col gap-4">
+      {/* Kadın */}
+      <div>
+        <p className="font-semibold mb-2">Kadın</p>
+        {women.map((cat) => (
+          <Link
+            key={cat.id}
+            to={`/shop/kadin/${cat.code.split(":")[1]}/${cat.id}`}
+            onClick={() => {
+              setOpen(false);
+              setMobileShopOpen(false);
+            }}
+            className="block text-light3-gray hover:text-dark-bg mb-1"
+          >
+            {cat.title}
+          </Link>
+        ))}
+      </div>
+
+      {/* Erkek */}
+      <div>
+        <p className="font-semibold mb-2">Erkek</p>
+        {men.map((cat) => (
+          <Link
+            key={cat.id}
+            to={`/shop/erkek/${cat.code.split(":")[1]}/${cat.id}`}
+            onClick={() => {
+              setOpen(false);
+              setMobileShopOpen(false);
+            }}
+            className="block text-light3-gray hover:text-dark-bg mb-1"
+          >
+            {cat.title}
+          </Link>
+        ))}
+      </div>
+    </div>
+  )}
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             <Link
               to="aboutus"
               onClick={() => {
