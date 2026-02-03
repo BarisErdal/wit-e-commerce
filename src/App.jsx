@@ -46,11 +46,15 @@ function App() {
           <PageContent />
         </Route>
 
-        <Route path="/shop/:productId">
+        <Route path="/shop/:gender/:categoryCode/:categoryId">
+          <ShopPage />
+        </Route>
+
+        <Route path="/shop/product/:productId">
           <ProductDetailPage />
         </Route>
 
-        <Route path="/shop">
+        <Route path="/shop" exact>
           <ShopPage />
         </Route>
 
