@@ -14,7 +14,7 @@ const ProductCard = ({ product,id }) => {
     ">
       <div className="w-full aspect-3/4 overflow-hidden bg-gray-100">
       <img
-        src={product.image}
+        src={product.images[0].url}
         alt={product.name}
         className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
       />
@@ -22,7 +22,7 @@ const ProductCard = ({ product,id }) => {
 
       <h2 className="text-base text-center">{product.name}</h2>
       <p className="text-sm text-second-text text-center">
-        {product.detail}
+        {product.description}
       </p>
 
       <div className="flex gap-2">

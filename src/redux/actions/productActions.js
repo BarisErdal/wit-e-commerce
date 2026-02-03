@@ -49,3 +49,27 @@ export const fetchCategories = () => {
     }
   };
 };
+
+
+export const fetchProducts=()=>{
+
+  return async (dispatch,getState) => {
+
+  const {productList}=getState().product;
+  if (productList.length > 0) return;
+
+   dispatch(setFetchState("FETCHING"));
+
+   try {
+    const res = await api.get('/products')
+    dispatch(setProductList(res.data.products))
+    dispatch(setTotal(res.data.total));
+      dispatch(setFetchState("FETCHED"));
+   } catch (error) {
+    console.error(error)
+    dispatch(setFetchState("FAILED"));
+   }
+
+
+  }
+}

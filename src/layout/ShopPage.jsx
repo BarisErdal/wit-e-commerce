@@ -1,15 +1,20 @@
 import { ChevronRight, LayoutGrid, ListChecks } from "lucide-react";
-import { shopProducts, brandsData } from "../data/data";
+import { brandsData } from "../data/data";
 import Cloth from "../components/Cloth";
 import { useState, useEffect } from "react";
 import ButtonCta from "../components/ButtonCta";
 import ProductCard from "../components/ProductCard";
 import Dropdown from "../components/Dropdown";
-import { useSelector } from "react-redux";
-
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProducts } from "../redux/actions/productActions";
+import Spinner from '../components/Spinner'
 const options = ["Popularity", "Moda", "Ev & Yaşam", "Spor"];
 
 const ShopPage = () => {
+  const shopProducts = useSelector((s) => s.product.productList);
+   const {categories, fetchState} = useSelector((s) => s.product);
+
+  const dispatch = useDispatch();
   const ITEMS_PER_PAGE = 12;
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -18,15 +23,37 @@ const ShopPage = () => {
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
   const endIndex = startIndex + ITEMS_PER_PAGE;
 
+
+ 
   const currentProducts = shopProducts.slice(startIndex, endIndex);
 
-    const categories = useSelector((s) => s.product.categories);
+   
+   
 const shopCategories=categories.sort((a, b) => b.rating - a.rating).slice(0, 5)
 
+
+
+
+
+    useEffect(() => {
+   
+    dispatch(fetchProducts());
+  }, [dispatch]);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [currentPage]);
+
+
+  
+
+    if (fetchState === "FETCHING") {
+    return <Spinner />;
+  }
+
+  if (fetchState === "FAILED") {
+    return <p className="text-center text-red-500">Ürünler yüklenemedi</p>;
+  }
 
   return (
     <section className="mt-15 md:mt-35  mx-auto font-montserrat ">
@@ -50,8 +77,8 @@ const shopCategories=categories.sort((a, b) => b.rating - a.rating).slice(0, 5)
   px-4
 "
         >
-          {shopCategories.map((cat, i) => (
-            <Cloth key={i} data={cat} />
+          {shopCategories.map((cat) => (
+            <Cloth key={cat.id} data={cat} />
           ))}
         </div>
       </div>
@@ -77,6 +104,11 @@ const shopCategories=categories.sort((a, b) => b.rating - a.rating).slice(0, 5)
 
       {/* shop products */}
 
+
+
+
+
+
       <div
         className="
   mx-auto
@@ -88,8 +120,8 @@ const shopCategories=categories.sort((a, b) => b.rating - a.rating).slice(0, 5)
   md:grid md:grid-cols-4 md:gap-4
 "
       >
-        {currentProducts.map((p, i) => (
-          <ProductCard key={i} product={p} id={i+200} />
+        {currentProducts.map((p) => (
+          <ProductCard key={p.id} product={p}  />
         ))}
       </div>
 {/*pagination */}
