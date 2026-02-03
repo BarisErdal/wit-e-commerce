@@ -1,14 +1,16 @@
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 
-const Dropdown = ({ options }) => {
+const Dropdown = ({ options, value, onChange }) => {
   const [isOpen, setIsOpen] = useState(false);
-  // State: Seçilen menü öğesinin adı (Başlangıçta 'Menü Seç' diyebiliriz)
-  const [selectedItem, setSelectedItem] = useState(options[0]);
+  const [selectedItem, setSelectedItem] = useState(
+    value ?? options[0]
+  );
 
   const handleSelect = (item) => {
-    setSelectedItem(item); // İsmi güncelle
-    setIsOpen(false); // Menüyü kapat
+    setSelectedItem(item);
+    setIsOpen(false);
+    if (onChange) onChange(item);
   };
 
   return (
@@ -18,20 +20,18 @@ const Dropdown = ({ options }) => {
         setIsOpen(false);
       }}
     >
-      {/* Dropdown Butonu */}
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="h-12.5 inline-flex justify-between items-center w-full px-4 py-2 text-sm font-medium text-second-text bg-gray-100 rounded-md hover:bg-dark-bg hover:text-white focus:outline-none transition-all"
       >
-        {selectedItem}
+        {value ?? selectedItem}
         <ChevronDown
           className={`ml-2 w-4 h-4 transition-transform ${isOpen ? "rotate-180" : ""}`}
         />
       </button>
 
-      {/* Açılır Menü Listesi */}
       {isOpen && (
-        <div className="absolute right-0 z-10 mt-2 w-full origin-top-right rounded-md bg-white shadow-lg   focus:outline-none">
+        <div className="absolute right-0 z-10 mt-2 w-full origin-top-right rounded-md bg-white shadow-lg focus:outline-none">
           <div className="py-1">
             {options.map((option) => (
               <button

@@ -92,7 +92,7 @@ export default function Header() {
               </div>
             </div>
 
-            <Link to="aboutus" className="hover:text-success">
+            <Link to="/aboutus" className="hover:text-success">
               About
             </Link>
             <a href="#" className="hover:text-success">
@@ -192,7 +192,7 @@ export default function Header() {
                     {women.map((cat) => (
                       <Link
                         key={cat.id}
-                        to={`/shop/kadin/${cat.code.split(":")[1]}/${cat.id}`}
+                      to={`/shop/kadin/${cat.code.split(":")[1]}/${cat.id}`}
                         onClick={() => {
                           setOpen(false);
                           setMobileShopOpen(false);
@@ -210,7 +210,7 @@ export default function Header() {
                     {men.map((cat) => (
                       <Link
                         key={cat.id}
-                        to={`/shop/erkek/${cat.code.split(":")[1]}/${cat.id}`}
+                      to={`/shop/erkek/${cat.code.split(":")[1]}/${cat.id}`}
                         onClick={() => {
                           setOpen(false);
                           setMobileShopOpen(false);
@@ -226,7 +226,7 @@ export default function Header() {
             </div>
 
             <Link
-              to="aboutus"
+              to="/aboutus"
               onClick={() => {
                 setOpen(false);
               }}

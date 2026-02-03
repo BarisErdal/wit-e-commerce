@@ -51,25 +51,26 @@ export const fetchCategories = () => {
 };
 
 
-export const fetchProducts=()=>{
+export const fetchProducts = ({ categoryId, sort, filter } = {}) => {
+  return async (dispatch) => {
+    dispatch(setFetchState("FETCHING"));
 
-  return async (dispatch,getState) => {
+    const params = new URLSearchParams();
+    if (categoryId) params.set("category", categoryId);
+    if (sort) params.set("sort", sort);
+    if (filter) params.set("filter", filter);
 
-  const {productList}=getState().product;
-  if (productList.length > 0) return;
+    const query = params.toString();
+    const url = query ? `/products?${query}` : "/products";
 
-   dispatch(setFetchState("FETCHING"));
-
-   try {
-    const res = await api.get('/products')
-    dispatch(setProductList(res.data.products))
-    dispatch(setTotal(res.data.total));
+    try {
+      const res = await api.get(url);
+      dispatch(setProductList(res.data.products));
+      dispatch(setTotal(res.data.total));
       dispatch(setFetchState("FETCHED"));
-   } catch (error) {
-    console.error(error)
-    dispatch(setFetchState("FAILED"));
-   }
-
-
-  }
-}
+    } catch (error) {
+      console.error(error);
+      dispatch(setFetchState("FAILED"));
+    }
+  };
+};

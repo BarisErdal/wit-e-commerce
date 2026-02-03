@@ -1,58 +1,78 @@
 import { ChevronRight, LayoutGrid, ListChecks } from "lucide-react";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import { brandsData } from "../data/data";
 import Cloth from "../components/Cloth";
-import { useState, useEffect } from "react";
 import ButtonCta from "../components/ButtonCta";
 import ProductCard from "../components/ProductCard";
 import Dropdown from "../components/Dropdown";
-import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../redux/actions/productActions";
-import Spinner from '../components/Spinner'
-const options = ["Popularity", "Moda", "Ev & Yaşam", "Spor"];
+import Spinner from "../components/Spinner";
+
+const sortOptions = [
+  "price:asc",
+  "price:desc",
+  "rating:asc",
+  "rating:desc",
+];
 
 const ShopPage = () => {
   const shopProducts = useSelector((s) => s.product.productList);
-   const {categories, fetchState} = useSelector((s) => s.product);
+  const { categories, fetchState, total } = useSelector((s) => s.product);
+  const { categoryId } = useParams();
 
   const dispatch = useDispatch();
   const ITEMS_PER_PAGE = 12;
   const [currentPage, setCurrentPage] = useState(1);
+  const [sort, setSort] = useState("");
+  const [pendingSort, setPendingSort] = useState(sortOptions[0]);
+  const [filterText, setFilterText] = useState("");
+  const [debouncedFilter, setDebouncedFilter] = useState("");
 
-  const totalPages = Math.ceil(shopProducts.length / ITEMS_PER_PAGE);
+  const totalPages = Math.max(
+    1,
+    Math.ceil(shopProducts.length / ITEMS_PER_PAGE)
+  );
 
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
   const endIndex = startIndex + ITEMS_PER_PAGE;
-
-
- 
   const currentProducts = shopProducts.slice(startIndex, endIndex);
 
-   
-   
-const shopCategories=categories.sort((a, b) => b.rating - a.rating).slice(0, 5)
+  const shopCategories = [...categories]
+    .sort((a, b) => b.rating - a.rating)
+    .slice(0, 5);
 
+  useEffect(() => {
+    dispatch(fetchProducts({ categoryId, sort, filter: debouncedFilter }));
+  }, [dispatch, categoryId, sort, debouncedFilter]);
 
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [categoryId, sort, debouncedFilter]);
 
+  useEffect(() => {
+    const handle = setTimeout(() => {
+      setDebouncedFilter(filterText);
+    }, 400);
 
-
-    useEffect(() => {
-   
-    dispatch(fetchProducts());
-  }, [dispatch]);
+    return () => clearTimeout(handle);
+  }, [filterText]);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [currentPage]);
 
-
-  
-
-    if (fetchState === "FETCHING") {
+  if (fetchState === "FETCHING") {
     return <Spinner />;
   }
 
   if (fetchState === "FAILED") {
-    return <p className="text-center text-red-500">Ürünler yüklenemedi</p>;
+    return (
+      <p className="text-center text-red-500">
+        Products could not be loaded
+      </p>
+    );
   }
 
   return (
@@ -85,7 +105,7 @@ const shopCategories=categories.sort((a, b) => b.rating - a.rating).slice(0, 5)
 
       <div className="flex flex-col justify-between gap-y-6 max-w-7xl mx-auto items-center mt-12 md:flex md:flex-row md:max-w-262.5 md:mx-20">
         <h3 className="text-second-text text-sm font-bold">
-          Showing all 12 Results
+          Showing all {total} Results
         </h3>
         <div className="flex items-center gap-4">
           <h4 className="text-second-text text-sm font-bold">Views: </h4>
@@ -96,19 +116,23 @@ const shopCategories=categories.sort((a, b) => b.rating - a.rating).slice(0, 5)
             <ListChecks className="text-second-text" size={16} />
           </div>
         </div>
-        <div>
-          <Dropdown options={options} />
-          <ButtonCta className="ml-4">Filter</ButtonCta>
+        <div className="flex items-center gap-4">
+          <input
+            value={filterText}
+            onChange={(e) => setFilterText(e.target.value)}
+            placeholder="Filter"
+            className="h-12.5 px-4 py-2 text-sm font-medium text-second-text bg-gray-100 rounded-md focus:outline-none"
+          />
+          <Dropdown
+            options={sortOptions}
+            value={pendingSort}
+            onChange={setPendingSort}
+          />
+          <ButtonCta onClick={() => setSort(pendingSort)}>Filter</ButtonCta>
         </div>
       </div>
 
       {/* shop products */}
-
-
-
-
-
-
       <div
         className="
   mx-auto
@@ -121,12 +145,12 @@ const shopCategories=categories.sort((a, b) => b.rating - a.rating).slice(0, 5)
 "
       >
         {currentProducts.map((p) => (
-          <ProductCard key={p.id} product={p}  />
+          <ProductCard key={p.id} product={p} />
         ))}
       </div>
-{/*pagination */}
+
+      {/* pagination */}
       <div className="flex justify-center items-center gap-2 mt-12 flex-wrap">
-        {/* Prev */}
         <button
           onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
           disabled={currentPage === 1}
@@ -135,9 +159,11 @@ const shopCategories=categories.sort((a, b) => b.rating - a.rating).slice(0, 5)
           Prev
         </button>
 
-        {/* Page numbers */}
         {Array.from({ length: totalPages }, (_, i) => i + 1)
-          .slice(Math.max(currentPage - 2, 0), Math.max(currentPage - 2, 0) + 3)
+          .slice(
+            Math.max(currentPage - 2, 0),
+            Math.max(currentPage - 2, 0) + 3
+          )
           .map((page) => (
             <button
               key={page}
@@ -155,7 +181,6 @@ const shopCategories=categories.sort((a, b) => b.rating - a.rating).slice(0, 5)
             </button>
           ))}
 
-        {/* Next */}
         <button
           onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
           disabled={currentPage === totalPages}
