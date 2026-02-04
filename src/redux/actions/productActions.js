@@ -7,6 +7,8 @@ import {
   SET_LIMIT,
   SET_OFFSET,
   SET_FILTER,
+  SET_PRODUCT,
+  SET_PRODUCT_FETCH_STATE,
 } from "../actionTypes";
 
 export const setCategories = (data) => ({
@@ -25,6 +27,11 @@ export const setFetchState = (state) => ({
 export const setLimit = (limit) => ({ type: SET_LIMIT, payload: limit });
 export const setOffset = (offset) => ({ type: SET_OFFSET, payload: offset });
 export const setFilter = (filter) => ({ type: SET_FILTER, payload: filter });
+export const setProduct = (data) => ({ type: SET_PRODUCT, payload: data });
+export const setProductFetchState = (state) => ({
+  type: SET_PRODUCT_FETCH_STATE,
+  payload: state,
+});
 
 
 
@@ -71,6 +78,22 @@ export const fetchProducts = ({ categoryId, sort, filter } = {}) => {
     } catch (error) {
       console.error(error);
       dispatch(setFetchState("FAILED"));
+    }
+  };
+};
+
+export const fetchProductById = (productId) => {
+  return async (dispatch) => {
+    if (!productId) return;
+    dispatch(setProductFetchState("FETCHING"));
+
+    try {
+      const res = await api.get(`/products/${productId}`);
+      dispatch(setProduct(res.data));
+      dispatch(setProductFetchState("FETCHED"));
+    } catch (error) {
+      console.error(error);
+      dispatch(setProductFetchState("FAILED"));
     }
   };
 };

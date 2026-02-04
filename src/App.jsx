@@ -46,6 +46,10 @@ function App() {
           <PageContent />
         </Route>
 
+        <Route path="/shop/:gender/:categoryName/:categoryId/:productNameSlug/:productId">
+          <ProductDetailPage />
+        </Route>
+
         <Route path="/shop/product/:productId">
           <ProductDetailPage />
         </Route>

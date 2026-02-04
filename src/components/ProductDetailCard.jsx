@@ -9,10 +9,17 @@ import { Star, Heart, Eye, ShoppingCart } from "lucide-react";
 import ButtonCta from "./ButtonCta";
 import "./ProductDetailCard.css";
 
-const ProductDetailCard = () => {
+const ProductDetailCard = ({ product }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
-  const images = ["/shop/p1.jpg", "/shop/p2.jpg", "/shop/p3.jpg"];
+  const images =
+    product?.images?.length > 0
+      ? product.images.map((img) => img.url)
+      : ["/shop/p1.jpg", "/shop/p2.jpg", "/shop/p3.jpg"];
+
+  const ratingValue = Number(product?.rating || 0);
+  const filledStars = Math.round(ratingValue);
+  const isInStock = (product?.stock || 0) > 0;
 
   return (
     <div className="md:flex md:max-w-6xl md:mx-auto md:gap-8 overflow-hidden pt-20">
@@ -61,31 +68,37 @@ const ProductDetailCard = () => {
       {/* RIGHT – PRODUCT DETAILS */}
       <div className="font-montserrat p-5 flex-1 min-w-0">
         <h3 className="font-semibold text-xl text-dark-bg mb-3">
-          Floating Phone
+          {product?.name || "Product"}
         </h3>
 
         <div className="flex items-center gap-1 mb-5">
-          {[...Array(4)].map((_, i) => (
-            <Star key={i} fill="#F3CD03" strokeWidth={0} />
+          {[...Array(5)].map((_, i) => (
+            <Star
+              key={i}
+              fill={i < filledStars ? "#F3CD03" : "none"}
+              color="#F3CD03"
+              strokeWidth={0}
+              size={22}
+            />
           ))}
-          <Star color="#F3CD03" size={22} />
           <p className="ml-2 text-sm font-bold text-second-text">
-            10 Reviews
+            Rating: {ratingValue ? ratingValue.toFixed(2) : "N/A"}
           </p>
         </div>
 
         <h4 className="text-2xl font-bold text-dark-bg mb-1">
-          $1,139.33
+          ${product?.price ?? "--"}
         </h4>
 
         <h5 className="text-sm text-second-text font-bold mb-8">
           Availability :{" "}
-          <span className="text-header-turkuaz">In Stock</span>
+          <span className="text-header-turkuaz">
+            {isInStock ? "In Stock" : "Out of Stock"}
+          </span>
         </h5>
 
         <p className="text-light3-gray text-sm font-semibold tracking-wide pb-4 mb-6 border-b border-muted">
-          Met minim Mollie non desert Alamo est sit cliquey dolor do met
-          sent. RELIT official consequent door ENIM RELIT Mollie.
+          {product?.description || "Product description is unavailable."}
         </p>
 
         <div className="flex gap-3 mb-10">

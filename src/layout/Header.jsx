@@ -22,6 +22,7 @@ export default function Header() {
   const user = useSelector((state) => state.client.user);
   const dispatch = useDispatch();
   const [mobileShopOpen, setMobileShopOpen] = useState(false);
+  const hasToken = Boolean(user?.token || localStorage.getItem("token"));
 
   const categories = useSelector((s) => s.product.categories);
   const women = categories.filter((c) => c.gender === "k");
@@ -128,12 +129,14 @@ export default function Header() {
                 </Link>
               )}
 
-              { user && <button
-                className="hover: cursor-pointer "
-                onClick={() => dispatch(logout())}
-              >
-                Log Out
-              </button>}
+              {hasToken && (
+                <button
+                  className="hover: cursor-pointer "
+                  onClick={() => dispatch(logout())}
+                >
+                  Log Out
+                </button>
+              )}
             </div>
 
             {/* Search */}
