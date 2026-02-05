@@ -158,7 +158,7 @@ export default function Header() {
                 )}
               </button>
 
-              <div className="absolute right-0 mt-2 hidden group-hover:block z-20 w-72 rounded-md border border-dark-bg bg-white shadow-lg">
+              <div className="absolute right-0  hidden group-hover:block z-20 w-72 rounded-md border border-dark-bg bg-white shadow-lg">
                 <div className="px-4 py-3 border-b text-sm font-semibold text-logo-blue">
                   Shopping Cart
                 </div>

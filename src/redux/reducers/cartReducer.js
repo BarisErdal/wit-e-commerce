@@ -1,6 +1,10 @@
 import {
   SET_CART,
   ADD_TO_CART,
+  INCREMENT_CART_ITEM,
+  DECREMENT_CART_ITEM,
+  REMOVE_CART_ITEM,
+  TOGGLE_CART_ITEM,
   SET_PAYMENT,
   SET_ADDRESS,
 } from "../actionTypes";
@@ -40,6 +44,58 @@ const cartReducer = (state = initialState, action) => {
           : item
       );
       return { ...state, cart: nextCart };
+    }
+
+    case INCREMENT_CART_ITEM: {
+      const productId = action.payload;
+      if (!productId) return state;
+      return {
+        ...state,
+        cart: state.cart.map((item) =>
+          item.product?.id === productId
+            ? { ...item, count: (item.count || 0) + 1 }
+            : item
+        ),
+      };
+    }
+
+    case DECREMENT_CART_ITEM: {
+      const productId = action.payload;
+      if (!productId) return state;
+      return {
+        ...state,
+        cart: state.cart
+          .map((item) =>
+            item.product?.id === productId
+              ? { ...item, count: Math.max(1, (item.count || 1) - 1) }
+              : item
+          )
+          .filter((item) => item.count > 0),
+      };
+    }
+
+    case REMOVE_CART_ITEM: {
+      const productId = action.payload;
+      if (!productId) return state;
+      return {
+        ...state,
+        cart: state.cart.filter(
+          (item) => item.product?.id !== productId
+        ),
+      };
+    }
+
+    case TOGGLE_CART_ITEM: {
+      const productId = action.payload;
+      if (!productId) return state;
+      return {
+        ...state,
+        cart: state.cart.map((item) =>
+          item.product?.id === productId
+            ? { ...item, checked: !item.checked }
+            : item
+        ),
+      };
     }
 
     case SET_PAYMENT:

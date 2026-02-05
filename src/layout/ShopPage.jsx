@@ -188,19 +188,26 @@ const ShopPage = () => {
             <ListChecks className="text-second-text" size={16} />
           </div>
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto">
           <input
             value={filterText}
             onChange={(e) => setFilterText(e.target.value)}
             placeholder="Filter"
-            className="h-12.5 px-4 py-2 text-sm font-medium text-second-text bg-gray-100 rounded-md focus:outline-none"
+            className="h-12.5 px-4 py-2 text-sm font-medium text-second-text bg-gray-100 rounded-md focus:outline-none w-full sm:w-48"
           />
-          <Dropdown
-            options={sortOptions}
-            value={pendingSort}
-            onChange={setPendingSort}
-          />
-          <ButtonCta onClick={() => setSort(pendingSort)}>Filter</ButtonCta>
+          <div className="w-full sm:w-auto">
+            <Dropdown
+              options={sortOptions}
+              value={pendingSort}
+              onChange={setPendingSort}
+            />
+          </div>
+          <ButtonCta
+            onClick={() => setSort(pendingSort)}
+            className="w-full sm:w-auto"
+          >
+            Filter
+          </ButtonCta>
         </div>
       </div>
 

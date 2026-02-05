@@ -16,6 +16,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { restoreUser } from "./redux/actions/clientActions";
 import { fetchCategories } from "./redux/actions/productActions";
+import { CartPage } from "./pages/CartPage";
 
 
 function App() {
@@ -77,6 +78,11 @@ function App() {
 
          <Route path="/login">
           <Login />
+        </Route>
+
+
+        <Route path="/cart">
+          <CartPage />
         </Route>
 
 
