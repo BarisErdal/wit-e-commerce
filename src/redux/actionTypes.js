@@ -17,5 +17,6 @@ export const SET_PRODUCT_FETCH_STATE = "SET_PRODUCT_FETCH_STATE";
 
 // CART
 export const SET_CART = "SET_CART";
+export const ADD_TO_CART = "ADD_TO_CART";
 export const SET_PAYMENT = "SET_PAYMENT";
 export const SET_ADDRESS = "SET_ADDRESS";

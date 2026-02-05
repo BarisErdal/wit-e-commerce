@@ -5,12 +5,15 @@ import "swiper/css/navigation";
 import "swiper/css/thumbs";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Star, Heart, Eye, ShoppingCart } from "lucide-react";
 import ButtonCta from "./ButtonCta";
 import "./ProductDetailCard.css";
+import { addToCart } from "../redux/actions/cartActions..js";
 
 const ProductDetailCard = ({ product }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
+  const dispatch = useDispatch();
 
   const images =
     product?.images?.length > 0
@@ -111,7 +114,12 @@ const ProductDetailCard = ({ product }) => {
         <div className="flex flex-wrap items-center gap-4">
           <ButtonCta variant="primary">Select Options</ButtonCta>
           <Heart className="cursor-pointer" />
-          <ShoppingCart className="cursor-pointer" />
+          <ShoppingCart
+            className="cursor-pointer"
+            onClick={() => {
+              if (product) dispatch(addToCart(product));
+            }}
+          />
           <Eye className="cursor-pointer" />
         </div>
       </div>
