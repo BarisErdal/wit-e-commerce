@@ -44,9 +44,9 @@ const ProductCard = ({ product }) => {
       </p>
 
       <div className="flex gap-2">
-        <p className="text-muted">{product.price}</p>
+        <p className="text-muted line-through">{product.price*2}₺ </p>
         <p className="text-reduced-price-color">
-          {product.reducedPrice}
+          {product.price}₺
         </p>
       </div>
 

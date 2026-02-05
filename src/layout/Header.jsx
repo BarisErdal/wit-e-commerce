@@ -10,7 +10,7 @@ import {
   Youtube,
   Facebook,
   Twitter,
-  Phone,
+  Phone, Mail
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -30,9 +30,10 @@ export default function Header() {
 
   return (
     <header className="fixed top-0 left-0 w-full z-50 bg-white">
-      <div className="hidden md:flex bg-dark-bg h-16  text-white justify-between items-center px-6 font-bold font-montserrat">
+      <div className="hidden md:flex bg-dark-bg h-16  text-white justify-between items-center px-6 font-semibold font-montserrat">
         <div className="flex items-center">
           <Phone size={16} /> <p className="ml-3">(225) 555-0118</p>
+          <Mail  size={16} className='ml-4 font-normal mr-1'/><p>michelle.rivera@example.com</p>
         </div>
         <p>Follow Us and get a chance to win 80% off</p>
         <div className="flex items-center gap-4">
