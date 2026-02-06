@@ -17,6 +17,7 @@ import { useDispatch } from "react-redux";
 import { restoreUser } from "./redux/actions/clientActions";
 import { fetchCategories } from "./redux/actions/productActions";
 import { CartPage } from "./pages/CartPage";
+import { CreateOrderPage } from "./pages/CreateOrderPage";
 
 
 function App() {
@@ -85,6 +86,10 @@ function App() {
           <CartPage />
         </Route>
 
+
+<Route path="/checkout">
+<CreateOrderPage/>
+</Route>
 
 
 

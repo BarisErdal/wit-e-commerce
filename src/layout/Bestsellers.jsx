@@ -3,7 +3,9 @@ import  ProductCard from "../components/ProductCard";
 
 const Bestsellers = () => {
 
-    const homeProducts = useSelector((s) => s.product.productList);
+    const productList = useSelector((s) => s.product.productList);
+
+    const bestSellers = productList.sort((a,b) =>  b["sell_count"]-a["sell_count"])
   return (
     <section className="max-w-7xl mx-auto px-4 py-20 flex flex-col items-center">  
     
@@ -16,8 +18,8 @@ const Bestsellers = () => {
         </p>
       </div>
 
-      <div className="md:max-w-5xl md:grid md:grid-cols-4 gap-4 flex flex-col items-center">
-    {homeProducts.slice(0,8).map((product) => <ProductCard key={product.id} product={product} />)}
+      <div className="w-full md:max-w-5xl md:grid md:grid-cols-4 md:gap-4 flex flex-col items-center md:items-stretch md:justify-items-stretch">
+    {bestSellers.slice(0,8).map((product) => <ProductCard key={product.id} product={product} />)}
     </div>
      </section>                       
     );
