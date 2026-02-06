@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 import { Minus, Plus, Trash2, CheckCircle2 } from "lucide-react";
 import OrderSummary from "../components/OrderSummary";
 import {
@@ -12,6 +13,7 @@ import {
 export const CartPage = () => {
   const cart = useSelector((state) => state.cart.cart);
   const dispatch = useDispatch();
+  const history = useHistory();
   const [showDiscountInput, setShowDiscountInput] = useState(false);
   const [discountCode, setDiscountCode] = useState("");
 
@@ -144,6 +146,7 @@ export const CartPage = () => {
           setShowDiscountInput={setShowDiscountInput}
           discountCode={discountCode}
           setDiscountCode={setDiscountCode}
+          onConfirm={() => history.push("/checkout")}
         />
       </div>
     </section>

@@ -7,6 +7,7 @@ const OrderSummary = ({
   setShowDiscountInput,
   discountCode,
   setDiscountCode,
+  onConfirm,
 }) => {
   return (
     <aside className="w-full lg:w-96 bg-white rounded-sm border border-light2-gray shadow-sm h-fit">
@@ -67,6 +68,7 @@ const OrderSummary = ({
         <button
           className="w-full rounded-md bg-orange-500 text-white text-sm font-semibold py-3 hover:bg-orange-600 transition"
           type="button"
+          onClick={onConfirm}
         >
           Sepeti Onayla
         </button>
