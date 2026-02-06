@@ -18,6 +18,7 @@ import { restoreUser } from "./redux/actions/clientActions";
 import { fetchCategories } from "./redux/actions/productActions";
 import { CartPage } from "./pages/CartPage";
 import { CreateOrderPage } from "./pages/CreateOrderPage";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 
 function App() {
@@ -87,9 +88,9 @@ function App() {
         </Route>
 
 
-<Route path="/checkout">
-<CreateOrderPage/>
-</Route>
+        <ProtectedRoute path="/checkout">
+          <CreateOrderPage />
+        </ProtectedRoute>
 
 
 
