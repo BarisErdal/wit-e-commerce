@@ -1,8 +1,14 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import api from "../api/axios";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import OrderSummary from "../components/OrderSummary";
 import { cityOptions } from "../data/cities";
+import {
+  createAddress,
+  deleteAddress,
+  fetchAddresses,
+  setAddress,
+  updateAddress,
+} from "../redux/actions/cartActions..js";
 
 
 const emptyAddressForm = {
@@ -16,19 +22,21 @@ const emptyAddressForm = {
 };
 
 export const CreateOrderPage = () => {
+  const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart.cart);
+  const storedAddressForm = useSelector((state) => state.cart.address);
+  const addressList = useSelector((state) => state.cart.addressList);
+  const addressLoading = useSelector((state) => state.cart.addressLoading);
+  const addressError = useSelector((state) => state.cart.addressError);
   const [showDiscountInput, setShowDiscountInput] = useState(false);
   const [discountCode, setDiscountCode] = useState("");
 
   const [step, setStep] = useState(1);
-  const [addressList, setAddressList] = useState([]);
-  const [addressLoading, setAddressLoading] = useState(false);
-  const [addressError, setAddressError] = useState("");
 
   const [showAddressForm, setShowAddressForm] = useState(false);
   const [formMode, setFormMode] = useState("create");
   const [editingId, setEditingId] = useState(null);
-  const [addressForm, setAddressForm] = useState(emptyAddressForm);
+  const addressForm = { ...emptyAddressForm, ...storedAddressForm };
 
   const [shippingAddressId, setShippingAddressId] = useState(null);
   const [billingAddressId, setBillingAddressId] = useState(null);
@@ -43,40 +51,18 @@ export const CreateOrderPage = () => {
   const shippingCost = selectedTotal > 0 ? 39.9 : 0;
   const discountAmount = discountCode === "WIT-2026" ? 30 : 0;
   const grandTotal = selectedTotal + shippingCost - discountAmount;
-
-  const getAuthHeaders = () => {
-    const token = localStorage.getItem("token");
-    return token ? { Authorization: token } : {};
-  };
-
-  const fetchAddresses = useCallback(async () => {
-    setAddressLoading(true);
-    setAddressError("");
-    try {
-      const res = await api.get("/user/address", {
-        headers: getAuthHeaders(),
-      });
-      const list = Array.isArray(res.data)
-        ? res.data
-        : res.data?.data || [];
-      setAddressList(list);
-      if (!shippingAddressId && list.length > 0) {
-        setShippingAddressId(list[0].id);
-      }
-      if (!billingAddressId && list.length > 0) {
-        setBillingAddressId(list[0].id);
-      }
-    } catch (err) {
-        console.error(err);
-      setAddressError("Adresler yüklenemedi.");
-    } finally {
-      setAddressLoading(false);
-    }
-  }, [billingAddressId, shippingAddressId]);
+  useEffect(() => {
+    dispatch(fetchAddresses());
+  }, [dispatch]);
 
   useEffect(() => {
-    fetchAddresses();
-  }, [fetchAddresses]);
+    if (!shippingAddressId && addressList.length > 0) {
+      setShippingAddressId(addressList[0].id);
+    }
+    if (!billingAddressId && addressList.length > 0) {
+      setBillingAddressId(addressList[0].id);
+    }
+  }, [addressList, billingAddressId, shippingAddressId]);
 
   useEffect(() => {
     if (sameAsShipping) {
@@ -85,7 +71,7 @@ export const CreateOrderPage = () => {
   }, [sameAsShipping, shippingAddressId]);
 
   const resetForm = () => {
-    setAddressForm(emptyAddressForm);
+    dispatch(setAddress(emptyAddressForm));
     setFormMode("create");
     setEditingId(null);
   };
@@ -98,61 +84,48 @@ export const CreateOrderPage = () => {
   const handleEditAddress = (address) => {
     setFormMode("edit");
     setEditingId(address.id);
-    setAddressForm({
-      title: address.title || "",
-      name: address.name || "",
-      surname: address.surname || "",
-      phone: address.phone || "",
-      city: address.city || "",
-      district: address.district || "",
-      neighborhood: address.neighborhood || "",
-    });
+    dispatch(
+      setAddress({
+        title: address.title || "",
+        name: address.name || "",
+        surname: address.surname || "",
+        phone: address.phone || "",
+        city: address.city || "",
+        district: address.district || "",
+        neighborhood: address.neighborhood || "",
+      })
+    );
     setShowAddressForm(true);
   };
-
   const handleDeleteAddress = async (addressId) => {
-    try {
-      await api.delete(`/user/address/${addressId}`, {
-        headers: getAuthHeaders(),
-      });
-      setAddressList((prev) => prev.filter((item) => item.id !== addressId));
-      if (shippingAddressId === addressId) {
-        setShippingAddressId(null);
-      }
-      if (billingAddressId === addressId) {
-        setBillingAddressId(null);
-      }
-    } catch (err) {
-        console.error(err);
-      setAddressError("Adres silinemedi.");
+    const ok = await dispatch(deleteAddress(addressId));
+    if (!ok) return;
+    if (shippingAddressId === addressId) {
+      setShippingAddressId(null);
+    }
+    if (billingAddressId === addressId) {
+      setBillingAddressId(null);
     }
   };
-
   const handleAddressSubmit = async (event) => {
     event.preventDefault();
-    try {
-      if (formMode === "edit" && editingId) {
-        await api.put(
-          "/user/address",
-          { id: editingId, ...addressForm },
-          { headers: getAuthHeaders() }
-        );
-      } else {
-        await api.post("/user/address", addressForm, {
-          headers: getAuthHeaders(),
-        });
-      }
-      await fetchAddresses();
+    if (formMode === "edit" && editingId) {
+      const ok = await dispatch(
+        updateAddress({ id: editingId, ...addressForm })
+      );
+      if (!ok) return;
       setShowAddressForm(false);
       resetForm();
-    } catch (err) {
-        console.error(err);
-      setAddressError("Adres kaydedilemedi.");
+      return;
     }
+    const ok = await dispatch(createAddress(addressForm));
+    if (!ok) return;
+    setShowAddressForm(false);
+    resetForm();
   };
 
   const handleFormChange = (field, value) => {
-    setAddressForm((prev) => ({ ...prev, [field]: value }));
+    dispatch(setAddress({ ...addressForm, [field]: value }));
   };
 
   return (
@@ -518,3 +491,5 @@ export const CreateOrderPage = () => {
     </section>
   );
 };
+
+

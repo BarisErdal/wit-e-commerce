@@ -7,12 +7,18 @@ import {
   TOGGLE_CART_ITEM,
   SET_PAYMENT,
   SET_ADDRESS,
+  SET_ADDRESS_LIST,
+  SET_ADDRESS_LOADING,
+  SET_ADDRESS_ERROR,
 } from "../actionTypes";
 
 const initialState = {
   cart: [],
   payment: {},
   address: {},
+  addressList: [],
+  addressLoading: false,
+  addressError: "",
 };
 
 const cartReducer = (state = initialState, action) => {
@@ -103,6 +109,12 @@ const cartReducer = (state = initialState, action) => {
 
     case SET_ADDRESS:
       return { ...state, address: action.payload };
+    case SET_ADDRESS_LIST:
+      return { ...state, addressList: action.payload };
+    case SET_ADDRESS_LOADING:
+      return { ...state, addressLoading: action.payload };
+    case SET_ADDRESS_ERROR:
+      return { ...state, addressError: action.payload };
 
     default:
       return state;
