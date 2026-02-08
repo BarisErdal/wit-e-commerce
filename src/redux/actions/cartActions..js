@@ -11,6 +11,9 @@ import {
   SET_ADDRESS_LIST,
   SET_ADDRESS_LOADING,
   SET_ADDRESS_ERROR,
+  SET_CARD_LIST,
+  SET_CARD_LOADING,
+  SET_CARD_ERROR,
 } from "../actionTypes";
 
 export const setCart = (cart) => ({
@@ -65,6 +68,21 @@ export const setAddressLoading = (isLoading) => ({
 
 export const setAddressError = (message) => ({
   type: SET_ADDRESS_ERROR,
+  payload: message,
+});
+
+export const setCardList = (list) => ({
+  type: SET_CARD_LIST,
+  payload: list,
+});
+
+export const setCardLoading = (isLoading) => ({
+  type: SET_CARD_LOADING,
+  payload: isLoading,
+});
+
+export const setCardError = (message) => ({
+  type: SET_CARD_ERROR,
   payload: message,
 });
 
@@ -156,6 +174,107 @@ export const deleteAddress = (addressId) => {
       return false;
     } finally {
       dispatch(setAddressLoading(false));
+    }
+  };
+};
+
+export const fetchCards = () => {
+  return async (dispatch) => {
+    dispatch(setCardLoading(true));
+    dispatch(setCardError(""));
+    try {
+      const res = await api.get("/user/card", {
+        headers: getAuthHeaders(),
+      });
+      const list = Array.isArray(res.data)
+        ? res.data
+        : res.data?.data || [];
+      dispatch(setCardList(list));
+      return true;
+    } catch (err) {
+      console.error(err);
+      dispatch(setCardError("Kartlar yüklenemedi."));
+      return false;
+    } finally {
+      dispatch(setCardLoading(false));
+    }
+  };
+};
+
+export const createCard = (cardForm) => {
+  return async (dispatch) => {
+    dispatch(setCardLoading(true));
+    dispatch(setCardError(""));
+    try {
+      await api.post("/user/card", cardForm, {
+        headers: getAuthHeaders(),
+      });
+      await dispatch(fetchCards());
+      return true;
+    } catch (err) {
+      console.error(err);
+      dispatch(setCardError("Kart kaydedilemedi."));
+      return false;
+    } finally {
+      dispatch(setCardLoading(false));
+    }
+  };
+};
+
+export const updateCard = ({ id, ...cardForm }) => {
+  return async (dispatch) => {
+    if (!id) return false;
+    dispatch(setCardLoading(true));
+    dispatch(setCardError(""));
+    try {
+      await api.put(
+        "/user/card",
+        { id, ...cardForm },
+        { headers: getAuthHeaders() }
+      );
+      await dispatch(fetchCards());
+      return true;
+    } catch (err) {
+      console.error(err);
+      dispatch(setCardError("Kart kaydedilemedi."));
+      return false;
+    } finally {
+      dispatch(setCardLoading(false));
+    }
+  };
+};
+
+export const deleteCard = (cardId) => {
+  return async (dispatch) => {
+    if (!cardId) return false;
+    dispatch(setCardLoading(true));
+    dispatch(setCardError(""));
+    try {
+      await api.delete(`/user/card/${cardId}`, {
+        headers: getAuthHeaders(),
+      });
+      await dispatch(fetchCards());
+      return true;
+    } catch (err) {
+      console.error(err);
+      dispatch(setCardError("Kart silinemedi."));
+      return false;
+    } finally {
+      dispatch(setCardLoading(false));
+    }
+  };
+};
+
+export const createOrder = (orderPayload) => {
+  return async () => {
+    try {
+      const res = await api.post("/order", orderPayload, {
+        headers: getAuthHeaders(),
+      });
+      return res.data;
+    } catch (err) {
+      console.error(err);
+      return null;
     }
   };
 };

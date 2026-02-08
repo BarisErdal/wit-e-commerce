@@ -10,6 +10,9 @@ import {
   SET_ADDRESS_LIST,
   SET_ADDRESS_LOADING,
   SET_ADDRESS_ERROR,
+  SET_CARD_LIST,
+  SET_CARD_LOADING,
+  SET_CARD_ERROR,
 } from "../actionTypes";
 
 const initialState = {
@@ -19,6 +22,9 @@ const initialState = {
   addressList: [],
   addressLoading: false,
   addressError: "",
+  cardList: [],
+  cardLoading: false,
+  cardError: "",
 };
 
 const cartReducer = (state = initialState, action) => {
@@ -115,6 +121,12 @@ const cartReducer = (state = initialState, action) => {
       return { ...state, addressLoading: action.payload };
     case SET_ADDRESS_ERROR:
       return { ...state, addressError: action.payload };
+    case SET_CARD_LIST:
+      return { ...state, cardList: action.payload };
+    case SET_CARD_LOADING:
+      return { ...state, cardLoading: action.payload };
+    case SET_CARD_ERROR:
+      return { ...state, cardError: action.payload };
 
     default:
       return state;
