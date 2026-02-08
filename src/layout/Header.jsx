@@ -134,7 +134,7 @@ export default function Header() {
 
               {hasToken && (
                 <button
-                  className="hover: cursor-pointer "
+                  className="hover: cursor-pointer ml-5 "
                   onClick={() => dispatch(logout())}
                 >
                   Log Out

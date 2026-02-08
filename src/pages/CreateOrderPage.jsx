@@ -2,90 +2,8 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import api from "../api/axios";
 import OrderSummary from "../components/OrderSummary";
+import { cityOptions } from "../data/cities";
 
-const cityOptions = [
-  "Adana",
-  "Adıyaman",
-  "Afyonkarahisar",
-  "Ağrı",
-  "Aksaray",
-  "Amasya",
-  "Ankara",
-  "Antalya",
-  "Ardahan",
-  "Artvin",
-  "Aydın",
-  "Balıkesir",
-  "Bartın",
-  "Batman",
-  "Bayburt",
-  "Bilecik",
-  "Bingöl",
-  "Bitlis",
-  "Bolu",
-  "Burdur",
-  "Bursa",
-  "Çanakkale",
-  "Çankırı",
-  "Çorum",
-  "Denizli",
-  "Diyarbakır",
-  "Düzce",
-  "Edirne",
-  "Elazığ",
-  "Erzincan",
-  "Erzurum",
-  "Eskişehir",
-  "Gaziantep",
-  "Giresun",
-  "Gümüşhane",
-  "Hakkari",
-  "Hatay",
-  "Iğdır",
-  "Isparta",
-  "İstanbul",
-  "İzmir",
-  "Kahramanmaraş",
-  "Karabük",
-  "Karaman",
-  "Kars",
-  "Kastamonu",
-  "Kayseri",
-  "Kilis",
-  "Kırıkkale",
-  "Kırklareli",
-  "Kırşehir",
-  "Kocaeli",
-  "Konya",
-  "Kütahya",
-  "Malatya",
-  "Manisa",
-  "Mardin",
-  "Mersin",
-  "Muğla",
-  "Muş",
-  "Nevşehir",
-  "Niğde",
-  "Ordu",
-  "Osmaniye",
-  "Rize",
-  "Sakarya",
-  "Samsun",
-  "Şanlıurfa",
-  "Siirt",
-  "Sinop",
-  "Sivas",
-  "Şırnak",
-  "Tekirdağ",
-  "Tokat",
-  "Trabzon",
-  "Tunceli",
-  "Uşak",
-  "Van",
-  "Yalova",
-  "Yozgat",
-  "Zonguldak",
-];
 
 const emptyAddressForm = {
   title: "",
@@ -150,7 +68,7 @@ export const CreateOrderPage = () => {
       }
     } catch (err) {
         console.error(err);
-      setAddressError("Adresler y�klenemedi.");
+      setAddressError("Adresler yüklenemedi.");
     } finally {
       setAddressLoading(false);
     }
@@ -565,7 +483,7 @@ export const CreateOrderPage = () => {
                 Ödeme Seçenekleri
               </h3>
               <p className="text-sm text-second-text mt-2">
-                Bu ad�m yak�nda eklenecek.
+                Bu adım yakında eklenecek.
               </p>
               <div className="flex justify-between mt-6">
                 <button
