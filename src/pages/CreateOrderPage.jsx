@@ -87,25 +87,16 @@ export const CreateOrderPage = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (!shippingAddressId && addressList.length > 0) {
-      setShippingAddressId(addressList[0].id);
-    }
-    if (!billingAddressId && addressList.length > 0) {
-      setBillingAddressId(addressList[0].id);
-    }
-  }, [addressList, billingAddressId, shippingAddressId]);
-
-  useEffect(() => {
     if (!payment?.selectedCardId && cardList.length > 0) {
       dispatch(setPayment({ selectedCardId: cardList[0].id }));
     }
   }, [cardList, dispatch, payment?.selectedCardId]);
 
-  useEffect(() => {
-    if (sameAsShipping) {
-      setBillingAddressId(shippingAddressId);
-    }
-  }, [sameAsShipping, shippingAddressId]);
+  const derivedShippingAddressId =
+    shippingAddressId ?? addressList[0]?.id ?? null;
+  const derivedBillingAddressId = sameAsShipping
+    ? derivedShippingAddressId
+    : billingAddressId ?? addressList[0]?.id ?? null;
 
   const resetCardForm = () => {
     setCardForm(emptyCardForm);
@@ -196,20 +187,20 @@ export const CreateOrderPage = () => {
     setOrderSuccess("");
 
     const selectedItems = cart.filter((item) => item.checked);
-    if (!shippingAddressId) {
-      setOrderError("LÃ¼tfen teslimat adresi seÃ§in.");
+    if (!derivedShippingAddressId) {
+      setOrderError("Lütfen teslimat adresi seçin.");
       return;
     }
     if (!payment?.selectedCardId) {
-      setOrderError("LÃ¼tfen bir kart seÃ§in.");
+      setOrderError("Lütfen bir kart seçin.");
       return;
     }
     if (selectedItems.length === 0) {
-      setOrderError("Sepetinizde seÃ§ili Ã¼rÃ¼n bulunamadÄ±.");
+      setOrderError("Sepetinizde seçili ürün bulunamadÄ±.");
       return;
     }
     if (!cardCcv || String(cardCcv).trim().length < 3) {
-      setOrderError("LÃ¼tfen geÃ§erli bir CVC girin.");
+      setOrderError("Lütfen geçerli bir CVC girin.");
       return;
     }
 
@@ -217,12 +208,12 @@ export const CreateOrderPage = () => {
       (card) => card.id === payment.selectedCardId
     );
     if (!selectedCard) {
-      setOrderError("SeÃ§ili kart bulunamadÄ±.");
+      setOrderError("Seçili kart bulunamadı.");
       return;
     }
 
     const payload = {
-      address_id: shippingAddressId,
+      address_id: derivedShippingAddressId,
       order_date: new Date().toISOString(),
       card_no: String(selectedCard.card_no || "").replace(/\s/g, ""),
       card_name: selectedCard.name_on_card || "",
@@ -521,7 +512,7 @@ export const CreateOrderPage = () => {
                     <label
                       key={`shipping-${address.id}`}
                       className={`border rounded-md p-4 cursor-pointer transition ${
-                        shippingAddressId === address.id
+                        derivedShippingAddressId === address.id
                           ? "border-orange-500 bg-orange-50"
                           : "border-light2-gray"
                       }`}
@@ -545,7 +536,7 @@ export const CreateOrderPage = () => {
                         <input
                           type="radio"
                           name="shippingAddress"
-                          checked={shippingAddressId === address.id}
+                          checked={derivedShippingAddressId === address.id}
                           onChange={() => setShippingAddressId(address.id)}
                         />
                       </div>
@@ -591,7 +582,7 @@ export const CreateOrderPage = () => {
                     <label
                       key={`billing-${address.id}`}
                       className={`border rounded-md p-4 cursor-pointer transition ${
-                        billingAddressId === address.id
+                      derivedBillingAddressId === address.id
                           ? "border-orange-500 bg-orange-50"
                           : "border-light2-gray"
                       } ${sameAsShipping ? "opacity-60" : ""}`}
@@ -615,8 +606,8 @@ export const CreateOrderPage = () => {
                         <input
                           type="radio"
                           name="billingAddress"
-                          checked={billingAddressId === address.id}
-                          onChange={() => setBillingAddressId(address.id)}
+                        checked={derivedBillingAddressId === address.id}
+                        onChange={() => setBillingAddressId(address.id)}
                           disabled={sameAsShipping}
                         />
                       </div>
@@ -868,9 +859,6 @@ export const CreateOrderPage = () => {
     </section>
   );
 };
-
-
-
 
 
 
