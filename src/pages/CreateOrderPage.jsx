@@ -485,7 +485,7 @@ export const CreateOrderPage = () => {
                       type="submit"
                       className="rounded-md bg-orange-500 text-white text-sm font-semibold py-2 px-4 hover:bg-orange-600"
                     >
-                      {formMode === "edit" ? "G�ncelle" : "Kaydet"}
+                      {formMode === "edit" ? "Güncelle" : "Kaydet"}
                     </button>
                     <button
                       type="button"
@@ -638,7 +638,7 @@ export const CreateOrderPage = () => {
               </div>
 
               {cardLoading && (
-                <p className="text-sm text-second-text mt-3">Y�kleniyor...</p>
+                <p className="text-sm text-second-text mt-3">Yükleniyor...</p>
               )}
               {cardError && (
                 <p className="text-sm text-red-500 mt-3">{cardError}</p>
