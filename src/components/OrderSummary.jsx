@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 const OrderSummary = ({
   selectedTotal,
   shippingCost,
@@ -10,14 +8,18 @@ const OrderSummary = ({
   discountCode,
   setDiscountCode,
   onConfirm,
-  hideAfterConfirm = true,
+  primaryActionLabel,
+  onPrimaryAction,
+  showPrimaryAction = true,
+  secondaryActionLabel,
+  onSecondaryAction,
+  showSecondaryAction = true,
+  secondaryActionDisabled = false,
+  secondaryActionLoadingLabel,
+  showDiscountSection = true,
+  showConfirm = true,
 }) => {
-  const [confirmed, setConfirmed] = useState(false);
-
   const handleConfirm = () => {
-    if (hideAfterConfirm) {
-      setConfirmed(true);
-    }
     if (onConfirm) onConfirm();
   };
 
@@ -56,7 +58,7 @@ const OrderSummary = ({
         </div>
       </div>
       <div className="px-5 pb-5 space-y-3">
-        {(!hideAfterConfirm || !confirmed) && (
+        {showDiscountSection && (
           <>
             <button
               type="button"
@@ -79,14 +81,37 @@ const OrderSummary = ({
                 />
               </div>
             )}
-            <button
-              className="w-full rounded-md bg-orange-500 text-white text-sm font-semibold py-3 hover:bg-orange-600 transition"
-              type="button"
-              onClick={handleConfirm}
-            >
-              Sepeti Onayla
-            </button>
           </>
+        )}
+        {showConfirm && (
+          <button
+            className="w-full rounded-md bg-orange-500 text-white text-sm font-semibold py-3 hover:bg-orange-600 transition"
+            type="button"
+            onClick={handleConfirm}
+          >
+            Sepeti Onayla
+          </button>
+        )}
+        {showPrimaryAction && primaryActionLabel && (
+          <button
+            className="w-full rounded-md border border-orange-500 text-orange-500 text-sm font-semibold py-3 hover:bg-orange-50 transition"
+            type="button"
+            onClick={onPrimaryAction}
+          >
+            {primaryActionLabel}
+          </button>
+        )}
+        {showSecondaryAction && secondaryActionLabel && (
+          <button
+            className="w-full rounded-md bg-orange-500 text-white text-sm font-semibold py-3 hover:bg-orange-600 transition disabled:opacity-60 disabled:cursor-not-allowed"
+            type="button"
+            onClick={onSecondaryAction}
+            disabled={secondaryActionDisabled}
+          >
+            {secondaryActionDisabled && secondaryActionLoadingLabel
+              ? secondaryActionLoadingLabel
+              : secondaryActionLabel}
+          </button>
         )}
       </div>
     </aside>

@@ -147,7 +147,6 @@ export const CartPage = () => {
           discountCode={discountCode}
           setDiscountCode={setDiscountCode}
           onConfirm={() => history.push("/checkout")}
-          hideAfterConfirm
         />
       </div>
     </section>

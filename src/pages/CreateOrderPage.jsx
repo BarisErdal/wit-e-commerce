@@ -233,11 +233,11 @@ export const CreateOrderPage = () => {
     setOrderLoading(false);
 
     if (!result) {
-      setOrderError("SipariÅŸ oluÅŸturulamadÄ±.");
+      setOrderError("Sipariş Oluşturulamadı.");
       return;
     }
 
-    setOrderSuccess("SipariÅŸiniz alÄ±ndÄ±. HayÄ±rlÄ± olsun!");
+    setOrderSuccess("Siparişiniz alındı. Tebrikler!");
     dispatch(setCart([]));
     resetOrderState();
   };
@@ -616,15 +616,6 @@ export const CreateOrderPage = () => {
                 </div>
               </div>
 
-              <div className="flex justify-end">
-                <button
-                  type="button"
-                  onClick={() => setStep(2)}
-                  className="rounded-md bg-orange-500 text-white text-sm font-semibold py-3 px-6 hover:bg-orange-600"
-                >
-                  Kaydet ve Devam Et
-                </button>
-              </div>
             </div>
           )}
 
@@ -832,14 +823,6 @@ export const CreateOrderPage = () => {
                 >
                   Geri Dön
                 </button>
-                <button
-                  type="button"
-                  onClick={handleCreateOrder}
-                  disabled={orderLoading}
-                  className="rounded-md bg-orange-500 text-white text-sm font-semibold py-3 px-6 hover:bg-orange-600"
-                >
-                  {orderLoading ? "İşleniyor..." : "Siparişi Tamamla"}
-                </button>
               </div>
             </div>
           )}
@@ -854,13 +837,19 @@ export const CreateOrderPage = () => {
           setShowDiscountInput={setShowDiscountInput}
           discountCode={discountCode}
           setDiscountCode={setDiscountCode}
+          primaryActionLabel="Kaydet ve Devam Et"
+          onPrimaryAction={() => setStep(2)}
+          showPrimaryAction={step === 1}
+          secondaryActionLabel="Siparişi Tamamla"
+          secondaryActionLoadingLabel="İşleniyor..."
+          onSecondaryAction={handleCreateOrder}
+          secondaryActionDisabled={orderLoading}
+          showSecondaryAction={step === 2}
+          showDiscountSection={false}
+          showConfirm={false}
         />
       </div>
     </section>
   );
 };
-
-
-
-
 
