@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import OrderSummary from "../components/OrderSummary";
 import { cityOptions } from "../data/cities";
@@ -37,6 +38,7 @@ const emptyCardForm = {
 
 export const CreateOrderPage = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const cart = useSelector((state) => state.cart.cart);
   const storedAddressForm = useSelector((state) => state.cart.address);
   const payment = useSelector((state) => state.cart.payment);
@@ -212,9 +214,10 @@ export const CreateOrderPage = () => {
       return;
     }
 
+    const orderDate = new Date().toISOString();
     const payload = {
       address_id: derivedShippingAddressId,
-      order_date: new Date().toISOString(),
+      order_date: orderDate,
       card_no: String(selectedCard.card_no || "").replace(/\s/g, ""),
       card_name: selectedCard.name_on_card || "",
       card_expire_month: Number(selectedCard.expire_month),
@@ -238,6 +241,42 @@ export const CreateOrderPage = () => {
     }
 
     setOrderSuccess("Siparişiniz alındı. Tebrikler!");
+    const last4 = String(selectedCard.card_no || "")
+      .replace(/\D/g, "")
+      .slice(-4);
+    const orderNumber =
+      result?.id ||
+      result?.order_id ||
+      result?.orderId ||
+      result?.code ||
+      `WIT-${orderDate.replace(/\D/g, "").slice(-12)}`;
+    const summaryPayload = {
+      order: result,
+      orderNumber,
+      orderDate,
+      items: selectedItems,
+      totals: {
+        selectedTotal,
+        shippingCost,
+        discountAmount,
+        grandTotal,
+        discountCode,
+      },
+      shippingAddress:
+        addressList.find((address) => address.id === derivedShippingAddressId) ||
+        null,
+      billingAddress:
+        addressList.find((address) => address.id === derivedBillingAddressId) ||
+        null,
+      payment: {
+        name_on_card: selectedCard.name_on_card || "",
+        last4,
+        expire_month: selectedCard.expire_month,
+        expire_year: selectedCard.expire_year,
+      },
+    };
+
+    history.push("/order-summary", { summary: summaryPayload });
     dispatch(setCart([]));
     resetOrderState();
   };
@@ -852,4 +891,3 @@ export const CreateOrderPage = () => {
     </section>
   );
 };
-
