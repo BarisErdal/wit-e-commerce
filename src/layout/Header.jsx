@@ -112,33 +112,40 @@ export default function Header() {
 
           {/* Right Icons */}
           <div className="flex items-center gap-4">
-            <div className="hidden md:flex">
+            <div className="hidden md:flex items-center">
               {user?.email ? (
-                <div className="flex items-center gap-2">
-                  <Gravatar
-                    email={user.email}
-                    size={40}
-                    className="rounded-full"
-                  />
-                  <span>{user.name}</span>
+                <div className="relative group">
+                  <button className="flex items-center gap-2">
+                    <Gravatar
+                      email={user.email}
+                      size={40}
+                      className="rounded-full"
+                    />
+                    <span>{user.name}</span>
+                  </button>
+                  <div className="absolute right-0  hidden w-56 rounded-md border border-light2-gray bg-white shadow-lg group-hover:block">
+                    <Link
+                      to="/orders"
+                      className="block px-4 py-3 text-sm text-dark-bg hover:bg-gray-50"
+                    >
+                      Previous Orders
+                    </Link>
+                    <button
+                      className="w-full text-left px-4 py-3 text-sm text-red-500 hover:bg-gray-50 hover:cursor-pointer"
+                      onClick={() => dispatch(logout())}
+                    >
+                      Log Out
+                    </button>
+                  </div>
                 </div>
               ) : (
                 <Link
                   to="/signup"
-                  className="text-header-turkuaz  items-center gap-1 hidden md:flex"
+                  className="text-header-turkuaz items-center gap-1 hidden md:flex"
                 >
                   Login/Register
                   <User size={20} />
                 </Link>
-              )}
-
-              {hasToken && (
-                <button
-                  className="hover: cursor-pointer ml-5 "
-                  onClick={() => dispatch(logout())}
-                >
-                  Log Out
-                </button>
               )}
             </div>
 

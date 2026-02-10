@@ -19,7 +19,9 @@ import { fetchCategories } from "./redux/actions/productActions";
 import { CartPage } from "./pages/CartPage";
 import { CreateOrderPage } from "./pages/CreateOrderPage";
 import { OrderSummaryPage } from "./pages/OrderSummaryPage";
+import { PreviousOrders } from "./pages/PreviousOrders";
 import ProtectedRoute from "./components/ProtectedRoute";
+
 
 
 function App() {
@@ -96,6 +98,12 @@ function App() {
         <ProtectedRoute path="/order-summary">
           <OrderSummaryPage />
         </ProtectedRoute>
+
+        <ProtectedRoute path="/orders">
+          <PreviousOrders />
+        </ProtectedRoute>
+
+    
 
 
 
