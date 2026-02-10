@@ -48,6 +48,7 @@ export const loginUser = (formData, history) => {
       // redirect logic
       const prevPath = history.location.state?.from;
       history.push(prevPath || "/");
+      toast.success("Successfully logged in");
 
     } catch (err) {
       console.error(err);

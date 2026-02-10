@@ -1,2 +1,6 @@
-Deployed at https://wit-e-commerce.vercel.app 
+Live at https://wit-e-commerce.vercel.app 
 
+------------
+
+Login: customer@commerce.com
+Password: 123456

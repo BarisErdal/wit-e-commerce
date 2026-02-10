@@ -23,7 +23,7 @@ export default function Header() {
   const cart = useSelector((state) => state.cart.cart);
   const dispatch = useDispatch();
   const [mobileShopOpen, setMobileShopOpen] = useState(false);
-  const hasToken = Boolean(user?.token || localStorage.getItem("token"));
+  //const hasToken = Boolean(user?.token || localStorage.getItem("token"));
 
   const categories = useSelector((s) => s.product.categories);
   const women = categories.filter((c) => c.gender === "k");
